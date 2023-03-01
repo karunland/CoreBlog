@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface ICommentDal : IGenericDal<Contact>
+    public interface ICommentDal
     {
+        List<Comment> GetAll(int blogId);
     }
 }

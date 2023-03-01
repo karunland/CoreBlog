@@ -1,6 +1,8 @@
 ﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositores;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,61 +12,20 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfCommentRepository : ICategoryDal
+    public class EfCommentRepository : ICommentDal
     {
-        public void Delete(Contact item)
+        ICommentDal _commetDal;
+        public EfCommentRepository(ICommentDal commentDal)
         {
-            throw new NotImplementedException();
+            _commetDal = commentDal;
         }
-
-        public void Delete(Category item)
+        public List<Comment> GetAll(int blogId)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Category> GetAll(Expression<Func<Category, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Contact GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Contact> GetListAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(Contact item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(Category item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Contact item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Category item)
-        {
-            throw new NotImplementedException();
-        }
-
-        Category IGenericDal<Category>.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Category> IGenericDal<Category>.GetListAll()
-        {
-            throw new NotImplementedException();
+            using (var item = new Context())
+            {
+                List<Comment> x = item.Comments.Where(x => x.BlogId == blogId).ToList();
+                return x;
+            }
         }
     }
 }
