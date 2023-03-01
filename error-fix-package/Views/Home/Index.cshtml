@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<h2>Live Clock:</h2>
+<div id="clock"></div>
+
+<script>
+    function updateClock() {
+        var now = new Date();
+        var time = now.toLocaleTimeString();
+        document.getElementById("clock").innerHTML = time;
+    }
+    var message = "@ViewData["CurrentDateTime"]";
+    console.log(message);
+    console.log("merhaba dunya");
+    setInterval(updateClock, 1000);
+</script>
