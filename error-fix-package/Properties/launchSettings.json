@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "error_fix_package": {
+    "WebUI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

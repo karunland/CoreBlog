@@ -1,8 +1,8 @@
-﻿using error_fix_package.Models;
+﻿using WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace error_fix_package.Controllers
+namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {

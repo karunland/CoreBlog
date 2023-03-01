@@ -1,4 +1,4 @@
-namespace error_fix_package.Models
+namespace WebUI.Models
 {
     public class ErrorViewModel
     {

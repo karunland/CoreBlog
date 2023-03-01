@@ -2,7 +2,7 @@
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
-namespace error_fix_package.Controllers
+namespace WebUI.Controllers
 {
     public class CategoryController : Controller
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace error_fix_package.Controllers
+namespace WebUI.Controllers
 {
     public class DefaultController : Controller
     {
