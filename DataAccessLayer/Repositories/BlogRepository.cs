@@ -1,11 +1,10 @@
 ﻿using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
+using DataAccessLayer.Repositores;
 using EntityLayer.Concrete;
-using System.Linq.Expressions;
 
 namespace DataAccessLayer.Repositores
 {
-    public class CategoryRepository
+    public class BlogRepository: GenericRepository<Blog>
     {
 
     }
