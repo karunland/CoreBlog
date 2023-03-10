@@ -17,13 +17,10 @@ namespace EntityLayer.Concrete
         public string? BlogImage { get; set;}
         public DateTime? BlogCreateDate { get; set;}
         public bool? BlogStatus { get; set;}
-
-        // relation
         public int CatergoryId { get; set; }
-
-        //// add prop from category class
         public Category RCategory { get; set; }
-
-        //public List<Contact>? Comments { get; set; }
+        public int? WriterId { get; set; }
+        public Writer Writer { get; set; }
+        public List<Contact> Comments { get; set; }
     }
 }
