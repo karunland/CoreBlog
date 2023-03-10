@@ -42,10 +42,12 @@
                                 <h5 class="card-title">
                                     <a href="#">@item.BlogTitle</a>
                                 </h5>
-                                <p class="card-text mb-3"> 
-                                    
-                                    @(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 130))...</p>
-                                <a asp-action="BlogDetails" asp-route-id="@item.BlogId" class="btn btn-primary read-m">Read More</a>
+                                <p class="card-text mb-3">
+                                    @(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 130))...
+                                </p>
+
+                                @*@item.BlogContent.Substring(0, 130)...</p>*@
+                                <a asp-action="Details" asp-route-id="@item.BlogId" class="btn btn-primary read-m">Read More</a>
                             </div>
                         </div>
                     }
