@@ -5,44 +5,61 @@
 
 @model EntityLayer.Concrete.Writer
 
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--/main-->
 <section class="main-content-w3layouts-agileits">
     <div class="container">
         <h3 class="tittle">Register Now</h3>
         <div class="inner-sec">
             <div class="login p-5 bg-light mx-auto mw-100">
-                <form  method="post">
+                @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+                {
                     <div class="form-row">
+
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Name</label>
-
-                            <input type="text" class="form-control" name="WriterName">
+                            @*<input type="text" class="form-control" name="WriterName">*@
+                            @Html.TextBoxFor(x => x.WriterName, new { @class="form-control"})
+                            @Html.ValidationMessageFor(x => x.WriterName, "", new {@class="text-danger"})
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom02">Mail</label>
-                            <input type="email" class="form-control" name="WriterMail">
+                            @*<input type="email" class="form-control" name="WriterMail">*@
+                            @Html.TextBoxFor(x => x.WriterMail, new { @class="form-control"})
+                            @Html.ValidationMessageFor(x => x.WriterMail, "", new {@class="text-danger"})
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleInputPassword1 mb-2">Password</label>
-                            <input type="password" class="form-control" name="WriterPassword">
+                            @*<input type="password" class="form-control" name="WriterPassword">*@
+                            @Html.TextBoxFor(x => x.WriterPassword, new { @class="form-control"})
+                            @Html.ValidationMessageFor(x => x.WriterPassword, "", new {@class="text-danger"})
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleInputPassword2 mb-2">Image Path</label>
-                            <input type="text" class="form-control" name="WriterImage">
+                            @*<input type="text" class="form-control" name="WriterImage">*@
+                            @Html.TextBoxFor(x => x.WriterImage, new { @class="form-control"})
+                            @Html.ValidationMessageFor(x => x.WriterImage, "", new {@class="text-danger"})
                         </div>
-
                     </div>
-                    <button type="submit" class="btn btn-primary submit mb-4" >Register</button>
-                    <p>
-                        <a href="#">By clicking Signup, I agree to your terms</a>
-                    </p>
-                </form>
-
+                    <button type="submit" class="btn btn-primary submit mb-4" id="">Register</button>
+                }
             </div>
         </div>
     </div>
 </section>
+<button id="registerbutton" class="btn btn-info">CLIKCME</button>
 <!--//main-->
+
+<script>
+    $('#registerbutton').click(function () {
+        Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+        )
+    });
+</script>
 
