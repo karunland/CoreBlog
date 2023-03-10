@@ -13,7 +13,7 @@ namespace WebUI.Controllers
             return View(_blogManager.GetAllBlogs());
         }
         
-        public IActionResult BlogDetails(int id)
+        public IActionResult Details(int id)
         {
             return View(_blogManager.GetBlogById(id));
         }
