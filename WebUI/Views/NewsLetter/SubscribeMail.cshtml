@@ -1,0 +1,11 @@
+﻿@*@model EntityLayer.Concrete.NewsLetter*@
+
+<div class="tech-btm">
+    <h4>Sign up to our newsletter</h4>
+    <p>Tech, Software and other blogs</p>
+    <form action="/NewsLetter/SubscribeMail/" method="post">
+        <input hidden name="BlogId" value="BlogId">
+        <input type="email" placeholder="Email" required="" name="Mail">
+        <input type="submit" value="Subscribe">
+    </form>
+</div>
