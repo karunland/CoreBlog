@@ -8,58 +8,88 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--/main-->
-<section class="main-content-w3layouts-agileits">
-    <div class="container">
-        <h3 class="tittle">Register Now</h3>
-        <div class="inner-sec">
-            <div class="login p-5 bg-light mx-auto mw-100">
-                @using (Html.BeginForm("Index", "Register", FormMethod.Post))
-                {
-                    <div class="form-row">
-
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Name</label>
-                            @*<input type="text" class="form-control" name="WriterName">*@
-                            @Html.TextBoxFor(x => x.WriterName, new { @class="form-control"})
-                            @Html.ValidationMessageFor(x => x.WriterName, "", new {@class="text-danger"})
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom02">Mail</label>
-                            @*<input type="email" class="form-control" name="WriterMail">*@
-                            @Html.TextBoxFor(x => x.WriterMail, new { @class="form-control"})
-                            @Html.ValidationMessageFor(x => x.WriterMail, "", new {@class="text-danger"})
+<section class="vh-100 bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            @using (Html.BeginForm("Index", "Register", FormMethod.Post, new { id = "registration-form" }))
+                            {
+                                <div class="form-outline mb-4">
+                                    <label for="validationCustom01">Name</label>
+                                    @*<input type="text" class="form-control" name="WriterName">*@
+                                    @Html.TextBoxFor(x => x.WriterName, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.WriterName, "", new {@class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label for="validationCustom02">Mail</label>
+                                    @*<input type="email" class="form-control" name="WriterMail">*@
+                                    @Html.TextBoxFor(x => x.WriterMail, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.WriterMail, "", new {@class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label for="exampleInputPassword1 mb-2">Password</label>
+                                    @*<input type="password" class="form-control" name="WriterPassword">*@
+                                    @Html.TextBoxFor(x => x.WriterPassword, new { @class="form-control", @type="password"})
+                                    @Html.ValidationMessageFor(x => x.WriterPassword, "", new {@class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label for="exampleInputPassword1 mb-2">Confirm Password</label>
+                                    @*<input type="password" class="form-control" name="WriterPassword">*@
+                                    @Html.TextBoxFor(x => x.WriterPasswordAgain, new { @class="form-control", @type="password"})
+                                    @Html.ValidationMessageFor(x => x.WriterPasswordAgain, "", new {@class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label for="exampleInputPassword2 mb-2">Image Path</label>
+                                    @*<input type="text" class="form-control" name="WriterImage">*@
+                                    @Html.TextBoxFor(x => x.WriterImage, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.WriterImage, "", new {@class="text-danger"})
+                                </div>
+                                <button type="submit" class="btn btn-primary submit mb-4" id="register-button">Register</button>
+                            }
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputPassword1 mb-2">Password</label>
-                            @*<input type="password" class="form-control" name="WriterPassword">*@
-                            @Html.TextBoxFor(x => x.WriterPassword, new { @class="form-control"})
-                            @Html.ValidationMessageFor(x => x.WriterPassword, "", new {@class="text-danger"})
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputPassword2 mb-2">Image Path</label>
-                            @*<input type="text" class="form-control" name="WriterImage">*@
-                            @Html.TextBoxFor(x => x.WriterImage, new { @class="form-control"})
-                            @Html.ValidationMessageFor(x => x.WriterImage, "", new {@class="text-danger"})
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary submit mb-4" id="">Register</button>
-                }
+                </div>
             </div>
         </div>
     </div>
 </section>
-<button id="registerbutton" class="btn btn-info">CLIKCME</button>
-<!--//main-->
 
 <script>
-    $('#registerbutton').click(function () {
-        Swal.fire(
-            'Good job!',
-            'You clicked the button!',
-            'success'
-        )
+    $('#register-button').click(function (e) {
+        e.preventDefault(); // prevent the form from submitting
+        var password = $('#WriterPassword').val();
+        var passwordAgain = $('#WriterPasswordAgain').val();
+        if (password === passwordAgain) {
+            $.ajax({
+                type: 'POST',
+                url: '/Register/Index',
+                data: $('#registration-form').serialize(),
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Done!',
+                        text: 'Registration successful',
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Passwords do not match!',
+            });
+        }
     });
 </script>
 

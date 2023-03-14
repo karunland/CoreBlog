@@ -25,6 +25,10 @@ namespace error_fix_package.Controllers
             ValidationResult results = vw.Validate(writer);
             if (results.IsValid)
             {
+                if (writer.WriterPassword != writer.WriterPasswordAgain)
+                {
+                    return RedirectToAction("Index", "Blog");
+                }
                 writer.WriterStatus = true;
                 writer.WriterAbout = "test_writerabout";
                 _writerManager.WriterAdd(writer);
