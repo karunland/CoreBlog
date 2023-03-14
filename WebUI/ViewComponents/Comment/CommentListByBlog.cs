@@ -11,6 +11,7 @@ namespace WebUI.ViewComponents
     {
         CommentManager _commentManager = new CommentManager(new EfCommentRepository());
 
+        [HttpGet]
         public IViewComponentResult Invoke(int BlogId)
         {
             var item = _commentManager.GetList(BlogId);
