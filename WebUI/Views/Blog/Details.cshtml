@@ -49,7 +49,7 @@
                     <a href="single.html" class="btn btn-primary read-m">Read More</a>
                 </div>
                 
-                @await Component.InvokeAsync("CommentListByBlog", new {BlogId = Model.BlogId})
+                @await Component.InvokeAsync("CommentListByBlog", new { BlogId = Model.BlogId })
 
                 @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
             
@@ -62,15 +62,9 @@
                     <div class="tech-btm">
                         <img src="~/CoreBlogTema/images/banner1.jpg" class="img-fluid" alt="">
                     </div>
-                    <div class="tech-btm">
-                        <h4>Sign up to our newsletter</h4>
-                        <p>Pellentesque dui, non felis. Maecenas male </p>
-                        <form action="#" method="post">
-                            <input type="email" placeholder="Email" required="">
-                            <input type="submit" value="Subscribe">
-                        </form>
+                    
+                    @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
 
-                    </div>
                     @await Component.InvokeAsync("CategoryList")
 
                     @await Component.InvokeAsync("WriterLastBlogs")
