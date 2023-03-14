@@ -20,31 +20,26 @@
                             {
                                 <div class="form-outline mb-4">
                                     <label for="validationCustom01">Name</label>
-                                    @*<input type="text" class="form-control" name="WriterName">*@
                                     @Html.TextBoxFor(x => x.WriterName, new { @class="form-control"})
                                     @Html.ValidationMessageFor(x => x.WriterName, "", new {@class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label for="validationCustom02">Mail</label>
-                                    @*<input type="email" class="form-control" name="WriterMail">*@
                                     @Html.TextBoxFor(x => x.WriterMail, new { @class="form-control"})
                                     @Html.ValidationMessageFor(x => x.WriterMail, "", new {@class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label for="exampleInputPassword1 mb-2">Password</label>
-                                    @*<input type="password" class="form-control" name="WriterPassword">*@
                                     @Html.TextBoxFor(x => x.WriterPassword, new { @class="form-control", @type="password"})
                                     @Html.ValidationMessageFor(x => x.WriterPassword, "", new {@class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label for="exampleInputPassword1 mb-2">Confirm Password</label>
-                                    @*<input type="password" class="form-control" name="WriterPassword">*@
                                     @Html.TextBoxFor(x => x.WriterPasswordAgain, new { @class="form-control", @type="password"})
                                     @Html.ValidationMessageFor(x => x.WriterPasswordAgain, "", new {@class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label for="exampleInputPassword2 mb-2">Image Path</label>
-                                    @*<input type="text" class="form-control" name="WriterImage">*@
                                     @Html.TextBoxFor(x => x.WriterImage, new { @class="form-control"})
                                     @Html.ValidationMessageFor(x => x.WriterImage, "", new {@class="text-danger"})
                                 </div>
@@ -58,7 +53,7 @@
     </div>
 </section>
 
-<script>
+@*<script>
     $('#register-button').click(function (e) {
         e.preventDefault(); // prevent the form from submitting
         var password = $('#WriterPassword').val();
@@ -91,5 +86,5 @@
             });
         }
     });
-</script>
+</script>*@
 
