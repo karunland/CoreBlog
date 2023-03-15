@@ -25,7 +25,7 @@
                                 <ul class="blog-icons my-4">
                                     <li>
                                         <a href="#">
-                                            <i class="far fa-calendar-alt"></i>  @(@item.BlogCreateDate == default(DateTime) ? "--/--/--" : @item.BlogCreateDate)
+                                            <i class="far fa-calendar-alt"></i>  @(@item.BlogCreateDate == default(DateTime) ? "--/--/--" : ((DateTime)@item.BlogCreateDate).ToString("dd/MM/yyyy"))
                                         </a>
                                     </li>
                                     <li class="mx-2">
