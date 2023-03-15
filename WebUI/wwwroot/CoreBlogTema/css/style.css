@@ -12,6 +12,9 @@ body {
 	font-family: 'Poppins', sans-serif;
 	background: #fff;
 }
+footer #myimage {
+	display: none;
+}
 
 body a {
 	text-decoration: none;

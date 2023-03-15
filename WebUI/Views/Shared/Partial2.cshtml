@@ -1,5 +1,5 @@
 ﻿    <!--footer-->
-<footer>
+<footer class="myfooter">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 footer-grid-agileits-w3ls text-left">
@@ -73,7 +73,10 @@
                 </div>
             </div>
             <!-- subscribe -->
-            <div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
+            
+            @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+
+            @*<div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
                 <h2>Signup to our newsletter</h2>
                 <div class="subscribe-main text-left">
                     <div class="subscribe-form">
@@ -86,7 +89,8 @@
                     <p>We respect your privacy.No spam ever!</p>
                 </div>
                 <!-- //subscribe -->
-            </div>
+            </div>*@
+
         </div>
         <!-- footer -->
         <div class="footer-cpy text-center">
@@ -135,3 +139,7 @@
 
     </div>
 </footer>
+
+@*<script>
+    $(".tech-btm").addClass("d-none");
+</script>*@
