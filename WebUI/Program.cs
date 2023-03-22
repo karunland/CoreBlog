@@ -1,7 +1,26 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();
+builder.Services.AddMvc();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    x => x.LoginPath = "/Login/Index"
+);
+
+builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+
+});
 
 var app = builder.Build();
 
@@ -24,6 +43,9 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=blog}/{action=index}/{id?}");
+    pattern: "{controller=login}/{action=index}/{id?}");
+
+app.UseAuthentication();
+app.UseSession();
 
 app.Run();

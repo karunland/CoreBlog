@@ -2,8 +2,8 @@
 @model List<Blog>
 
 <div class="tech-btm">
-    <h4>Top stories of the week</h4>
-    @foreach (var item in Model)
+    <h4>Top 3 stories of the week</h4>
+    @foreach (var item in Model.Take(3))
     {
         <div class="blog-grids row mb-3">
             <div class="col-md-5 blog-grid-left">
