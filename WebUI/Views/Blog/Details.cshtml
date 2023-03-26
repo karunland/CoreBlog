@@ -64,7 +64,7 @@
 
                     @await Component.InvokeAsync("CategoryList")
 
-                    @await Component.InvokeAsync("WriterLastBlogs")
+                    @await Component.InvokeAsync("WriterLastBlogs", new { id = Model.WriterId })
 
                     <div class="single-gd tech-btm">
                         <h4>Recent Post</h4>

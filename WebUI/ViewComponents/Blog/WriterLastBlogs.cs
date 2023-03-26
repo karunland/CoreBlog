@@ -8,10 +8,11 @@ namespace WebUI.ViewComponents.Blog
     public class WriterLastBlogs : ViewComponent
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
-        
-        public IViewComponentResult Invoke()
+
+        [HttpGet]
+        public IViewComponentResult Invoke(int id)
         {
-            var vals = bm.GetBlogByWriter(4);
+            var vals = bm?.GetBlogByWriter(id);
             return View(vals);
         }
     }
