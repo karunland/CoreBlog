@@ -1,0 +1,51 @@
+﻿@model EntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "BlogAdd";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            @using (Html.BeginForm("BlogAdd", "Blog", FormMethod.Post))
+                            {
+                                <input hidden type="text" name="BlogId">
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Title</label>
+                                    @Html.TextBoxFor(x => x.BlogTitle, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.BlogTitle, "", new { @class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Image</label>
+                                    @Html.TextBoxFor(x => x.BlogImage, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.BlogImage, "", new { @class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Thumbnail Image</label>
+                                    @Html.TextBoxFor(x => x.BlogThumbnailImage, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.BlogThumbnailImage, "", new { @class="text-danger"})
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Category</label>
+                                    @*@Html.LabelFor(x => x.CatergoryId, (List<SelectListItem>)ViewBag.cv, new { @class="form-control"})*@
+                                    <select class="form-select" asp-items="@ViewBag.cv" asp-for="@Model.CatergoryId"></select>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label>Content</label>
+                                    @Html.TextAreaFor(x => x.BlogContent, 10, 2, new { @class="form-control"})
+                                    @Html.ValidationMessageFor(x => x.BlogContent, "", new {@class="text-danger"})
+                                </div>
+                                <button type="submit" class="btn btn-primary submit mb-4" id="register-button">Add</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
