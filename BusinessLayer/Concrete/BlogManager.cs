@@ -24,7 +24,7 @@ namespace BusinessLayer.Concrete
 
         public List<Blog> GetBlogByWriter(int WriterId)
         {
-            return _blogDal.GetAll(x => x.WriterId == WriterId);
+            return _blogDal.GetAll(WriterId);
         }
 
         public void TAdd(Blog t)

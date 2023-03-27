@@ -17,5 +17,10 @@ namespace WebUI.Controllers
         {
             return View(_blogManager.GetBlogById(id));
         }
+
+        public IActionResult GetBLogByWriter(int id)
+        {
+            return View(_blogManager.GetBlogByWriter(4));
+        }
     }
 }

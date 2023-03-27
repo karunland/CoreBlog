@@ -13,7 +13,6 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var item = new Context())
             {
-                var list2 = item.Catergories.ToList();
                 var list = item.Blogs
                     .Include(x => x.RCategory)
                     .ToList();
@@ -21,6 +20,19 @@ namespace DataAccessLayer.EntityFramework
                 return list;
             }
         }
+        public List<Blog> GetAll(int WriterId)
+        {
+            using (var item = new Context())
+            {
+                var list = item.Blogs
+                    .Include(x => x.RCategory)
+                    .Where(x => x.WriterId == WriterId)
+                    .ToList();
+
+                return list;
+            }
+        }
+
         public List<Blog> GetAll(Expression<Func<Blog, bool>> filter)
         {
             using (var c = new Context())
