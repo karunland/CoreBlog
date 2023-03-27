@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class WriterController : Controller
     {
         public IActionResult Index()
@@ -13,6 +13,18 @@ namespace WebUI.Controllers
         public IActionResult WriterProfile(int? id)
         {
             return View();
+        }
+        public IActionResult Test(int? id)
+        {
+            return View();
+        }
+        public PartialViewResult WriterNavPartial()
+        {
+            return PartialView();
+        }
+        public PartialViewResult WriterFooterPartial()
+        {
+            return PartialView();
         }
     }
 }

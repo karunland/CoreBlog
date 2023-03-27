@@ -28,8 +28,4 @@
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewComponents\NewFolder\" />
-  </ItemGroup>
-
 </Project>
