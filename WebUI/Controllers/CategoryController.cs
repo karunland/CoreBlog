@@ -9,7 +9,7 @@ namespace WebUI.Controllers
         CategoryManager _categoryManager = new CategoryManager(new EfCategoryReposiyory());
         public IActionResult Index()
         {
-            return View(_categoryManager.GetAllCategories());
+            return View(_categoryManager.GetList());
         }
     }
 }

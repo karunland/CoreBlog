@@ -10,7 +10,7 @@ namespace WebUI.ViewComponents.Category
         CategoryManager _categoryManager = new CategoryManager(new EfCategoryReposiyory());
         public IViewComponentResult Invoke()
         {
-            var item = _categoryManager.GetAllCategories();
+            var item = _categoryManager.GetList();
             return View(item);
         }
 

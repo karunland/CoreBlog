@@ -4,44 +4,45 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class CategoryManager :ICategoryService
+    public class CategoryManager : ICategoryService
     {
         ICategoryDal _categoryDal;
-
 
         public CategoryManager(ICategoryDal categoryDal)
         {
             _categoryDal = categoryDal;
         }
-        public void CategoryAdd(Category category)
+
+
+        public Category GetByIdd(int id)
         {
-            if (category.CategoryName != "" &&
-                category.CatergoryDescription != "" &&
-                category.CategoryName.Length >= 5 &&
-                category.CategoryStatus == true)
-            {
-                _categoryDal.Insert(category);
-            }
+            throw new NotImplementedException();
         }
 
-        public void CategoryDelete(Category category)
-        {
-            _categoryDal.Delete(category);
-        }
-
-        public void CategoryUpdate(Category category)
-        {
-            _categoryDal.Update(category);
-        }
-
-        public List<Category> GetAllCategories()
+        public List<Category> GetList()
         {
             return _categoryDal.GetListAll();
         }
 
-        public Category GetCategoryById(int id)
+        public void TAdd(Category t)
         {
-            throw new NotImplementedException();
+            if (t.CategoryName != "" &&
+                t.CatergoryDescription != "" &&
+                //category.CategoryName.Length >= 5 &&
+                t.CategoryStatus == true)
+            {
+                _categoryDal.Insert(t);
+            }
+        }
+
+        public void TDelete(Category t)
+        {
+            _categoryDal.Delete(t);
+        }
+
+        public void TUpdate(Category t)
+        {
+            _categoryDal.Update(t);
         }
     }
 }

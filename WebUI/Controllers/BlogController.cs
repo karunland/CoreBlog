@@ -10,7 +10,7 @@ namespace WebUI.Controllers
 
         public IActionResult Index()
         {
-            return View(_blogManager.GetAllBlogs());
+            return View(_blogManager.GetList());
         }
         
         public IActionResult Details(int id)

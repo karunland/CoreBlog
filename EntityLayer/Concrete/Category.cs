@@ -14,9 +14,6 @@ namespace EntityLayer.Concrete
         public string CategoryName { get; set; }
         public string CatergoryDescription { get; set; }
         public bool CategoryStatus { get; set; }
-
-        // whats difference between icollection and list?
-        // entity girisi olarak liste turunde blog tablosunu iliskilendir
         public List<Blog> Blogs { get; set; }
     }
 }
