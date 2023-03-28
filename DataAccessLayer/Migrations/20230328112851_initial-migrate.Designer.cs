@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230303074205_add-relation-writer-blog")]
-    partial class addrelationwriterblog
+    [Migration("20230328112851_initial-migrate")]
+    partial class initialmigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,10 +87,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("BlogTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CatergoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RCategoryCatergoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("WriterId")
@@ -98,7 +95,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("BlogId");
 
-                    b.HasIndex("RCategoryCatergoryId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("WriterId");
 
@@ -107,11 +104,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
                 {
-                    b.Property<int>("CatergoryId")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatergoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -124,7 +121,7 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CatergoryId");
+                    b.HasKey("CategoryId");
 
                     b.ToTable("Catergories");
                 });
@@ -205,6 +202,26 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.NewsLetter", b =>
+                {
+                    b.Property<int>("MailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MailId"));
+
+                    b.Property<string>("Mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MailStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("MailId");
+
+                    b.ToTable("NewsLetters");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Writer", b =>
                 {
                     b.Property<int>("WriterId")
@@ -233,6 +250,10 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("WriterPasswordAgain")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("WriterStatus")
                         .HasColumnType("bit");
 
@@ -243,9 +264,9 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Category", "RCategory")
+                    b.HasOne("EntityLayer.Concrete.Category", "Category")
                         .WithMany("Blogs")
-                        .HasForeignKey("RCategoryCatergoryId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -255,7 +276,7 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RCategory");
+                    b.Navigation("Category");
 
                     b.Navigation("Writer");
                 });

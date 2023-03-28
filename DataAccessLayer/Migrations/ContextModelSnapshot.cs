@@ -84,18 +84,15 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("BlogTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CatergoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RCategoryCatergoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WriterId")
+                    b.Property<int>("WriterId")
                         .HasColumnType("int");
 
                     b.HasKey("BlogId");
 
-                    b.HasIndex("RCategoryCatergoryId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("WriterId");
 
@@ -104,11 +101,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
                 {
-                    b.Property<int>("CatergoryId")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatergoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -121,7 +118,7 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CatergoryId");
+                    b.HasKey("CategoryId");
 
                     b.ToTable("Catergories");
                 });
@@ -264,17 +261,19 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Category", "RCategory")
+                    b.HasOne("EntityLayer.Concrete.Category", "Category")
                         .WithMany("Blogs")
-                        .HasForeignKey("RCategoryCatergoryId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EntityLayer.Concrete.Writer", "Writer")
                         .WithMany("Blogs")
-                        .HasForeignKey("WriterId");
+                        .HasForeignKey("WriterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("RCategory");
+                    b.Navigation("Category");
 
                     b.Navigation("Writer");
                 });

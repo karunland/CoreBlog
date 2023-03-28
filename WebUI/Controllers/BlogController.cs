@@ -24,10 +24,10 @@ namespace WebUI.Controllers
 
         public IActionResult GetBLogByWriter(int id)
         {
-            return View(_blogManager.GetBlogByWriter(4));
+            return View(_blogManager.GetBlogByWriter(1));
         }
         [HttpGet]
-        public IActionResult BlogAdd()
+        public IActionResult BlogAdd(int? id)
         {
             CategoryManager cm = new CategoryManager(new EfCategoryReposiyory());
             List<SelectListItem> categoryValues = (from x in cm.GetList()
@@ -36,13 +36,18 @@ namespace WebUI.Controllers
                                                        Text = x.CategoryName,
                                                        Value = x.CategoryId.ToString()
                                                    }).ToList();
-            ViewBag.id = 4;
+            ViewBag.id = 1;
             ViewBag.cv = categoryValues;
+            if (id != 0 && id != null)
+            {
+                var item = _blogManager.GetBlogById((int)id);
+                return View(item);
+            }
             return View();
         }
 
         [HttpPost]
-        public IActionResult BlogAdd(Blog p, int id)
+        public IActionResult BlogAdd(Blog p)
         {
             BlogValidator bv = new BlogValidator();
             var results = bv.Validate(p);
