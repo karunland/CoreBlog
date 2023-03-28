@@ -33,7 +33,7 @@
                                 <div class="form-outline mb-4">
                                     <label class="mb-2">Category</label>
                                     @*@Html.LabelFor(x => x.CatergoryId, (List<SelectListItem>)ViewBag.cv, new { @class="form-control"})*@
-                                    <select class="form-select" asp-items="@ViewBag.cv" asp-for="@Model.CatergoryId"></select>
+                                    <select class="form-select" asp-items="@ViewBag.cv" asp-for="@Model.CategoryId"></select>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label>Content</label>

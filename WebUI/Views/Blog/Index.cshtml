@@ -29,7 +29,7 @@
                                     </li>
                                     <li class="mx-2">
                                         <a href="#">
-                                            <i class="far fa-comment"></i> @(String.IsNullOrEmpty(item.RCategory.CategoryName) ? "aa" : @item.RCategory.CategoryName)
+                                            <i class="far fa-comment"></i> @(item.Category == null ? "": @item.Category.CategoryName  )
                                         </a>
                                     </li>
                                     <li>
@@ -42,7 +42,8 @@
                                     <a href="#">@item.BlogTitle</a>
                                 </h5>
                                 <p class="card-text mb-3">
-                                    @(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 130))...
+                                    @item.BlogContent.Substring(0, 130)...
+                                    @*@(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 50))...*@
                                 </p>
                                 <a asp-action="Details" asp-route-id="@item.BlogId" class="btn btn-primary read-m">Read More</a>
                             </div>

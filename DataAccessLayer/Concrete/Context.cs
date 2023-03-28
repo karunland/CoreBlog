@@ -10,13 +10,11 @@ namespace DataAccessLayer.Concrete
 {
     public class Context: DbContext
     {
-        // databse connection
-        // tables will be created in here
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;" +
-                "Initial Catalog=todo5;"+
+                "Initial Catalog=blogsite;" +
                 "integrated security=true;");
         }
         public DbSet<About> Abouts { get; set; }

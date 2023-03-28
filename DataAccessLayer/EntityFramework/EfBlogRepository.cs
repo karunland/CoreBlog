@@ -14,7 +14,7 @@ namespace DataAccessLayer.EntityFramework
             using (var item = new Context())
             {
                 var list = item.Blogs
-                    .Include(x => x.RCategory)
+                    .Include(x => x.Category)
                     .ToList();
 
                 return list;
@@ -25,7 +25,7 @@ namespace DataAccessLayer.EntityFramework
             using (var item = new Context())
             {
                 var list = item.Blogs
-                    .Include(x => x.RCategory)
+                    .Include(x => x.Category)
                     .Where(x => x.WriterId == WriterId)
                     .ToList();
 
