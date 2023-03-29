@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.Migrations;
 using DataAccessLayer.Repositores;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
@@ -47,10 +48,17 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                Blog item = c.Blogs.Where(x => x.BlogId == id).FirstOrDefault();
+                Blog item = c.Blogs.Where(x => x.Id == id).FirstOrDefault();
                 item.isDeleted = true;
                 c.SaveChanges();
             }
         }
+        //public void Add(Blog model)
+        //{
+        //    using (var c = new Context())
+        //    {
+        //        if (model.BlogId == 0)
+        //    }
+        //}
     }
 }

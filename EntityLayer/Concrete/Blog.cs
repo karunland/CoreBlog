@@ -10,7 +10,7 @@ namespace EntityLayer.Concrete
     public class Blog : BaseEntity
     {
         [Key]
-        public int BlogId { get; set; }
+        public int Id { get; set; }
         public string? BlogTitle { get; set;}
         public string? BlogContent { get; set;}
         public string? BlogThumbnailImage { get; set;}

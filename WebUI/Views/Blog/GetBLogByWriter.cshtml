@@ -22,14 +22,14 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.BlogId</td>
+                <td>@item.Id</td>
                 <td>@item.BlogTitle</td>
                 <td>@item.CreatedDate</td>
                 <td>@item.Category.CategoryName</td>
                 <td>@(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 30))...</td>
                 <td>
-                    <a class="btn btn-warning" href="/blog/blogadd/@item.BlogId">update</a>
-                    <a class="btn btn-danger" href="/blog/blogdelete/@item.BlogId">delete</a>
+                    <a class="btn btn-warning" href="/blog/blogadd/@item.Id">update</a>
+                    <a class="btn btn-danger" href="/blog/blogdelete/@item.Id">delete</a>
                 </td>
             </tr>
         }

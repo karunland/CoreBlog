@@ -34,7 +34,7 @@ namespace WebUI.Controllers
                                                    select new SelectListItem
                                                    {
                                                        Text = x.CategoryName,
-                                                       Value = x.CategoryId.ToString()
+                                                       Value = x.Id.ToString()
                                                    }).ToList();
             ViewBag.id = 1;
             ViewBag.cv = categoryValues;

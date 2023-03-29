@@ -49,7 +49,7 @@
                     <a href="single.html" class="btn btn-primary read-m">Read More</a>
                 </div>
                 
-                @await Component.InvokeAsync("CommentListByBlog", new { BlogId = Model.BlogId })
+                @await Component.InvokeAsync("CommentListByBlog", new { BlogId = Model.Id })
 
                 @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
             
@@ -64,7 +64,7 @@
 
                     @await Component.InvokeAsync("CategoryList")
 
-                    @await Component.InvokeAsync("WriterLastBlogs", new { id = Model.WriterId })
+                    @await Component.InvokeAsync("WriterLastBlogs", new { id = Model.Id })
 
                     <div class="single-gd tech-btm">
                         <h4>Recent Post</h4>
