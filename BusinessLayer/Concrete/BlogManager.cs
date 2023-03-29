@@ -51,5 +51,10 @@ namespace BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteBlog(int id)
+        {
+            _blogDal.Delete(id);
+        }
     }
 }

@@ -53,9 +53,8 @@ namespace WebUI.Controllers
             var results = bv.Validate(p);
             if (results.IsValid)
             {
-                p.BlogStatus = true;
-                p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                p.WriterId = 4;
+                p.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                p.WriterId = 1;
                 _blogManager.TAdd(p);
                 return RedirectToAction("GetBlogByWriter", "Blog");
             }
@@ -67,6 +66,12 @@ namespace WebUI.Controllers
                 }
                 return View();
             }
+        }
+
+        public IActionResult BlogDelete(int id)
+        {
+            _blogManager.DeleteBlog(id);
+            return RedirectToAction("GetBLogByWriter");
         }
     }
 }

@@ -6,5 +6,6 @@ namespace DataAccessLayer.Abstract
     {
         List<Blog> GetAll();
         List<Blog> GetAll(int WriterId);
+        void Delete(int id);
     }
 }

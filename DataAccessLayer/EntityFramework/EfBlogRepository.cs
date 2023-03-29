@@ -26,7 +26,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 var list = item.Blogs
                     .Include(x => x.Category)
-                    .Where(x => x.WriterId == WriterId)
+                    .Where(x => x.WriterId == WriterId && x.isDeleted == false)
                     .ToList();
 
                 return list;
@@ -40,6 +40,16 @@ namespace DataAccessLayer.EntityFramework
                 return c.Set<Blog>()
                     .Where(filter)
                     .ToList();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var c = new Context())
+            {
+                Blog item = c.Blogs.Where(x => x.BlogId == id).FirstOrDefault();
+                item.isDeleted = true;
+                c.SaveChanges();
             }
         }
     }

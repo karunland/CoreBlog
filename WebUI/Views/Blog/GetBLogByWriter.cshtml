@@ -24,12 +24,12 @@
             <tr>
                 <td>@item.BlogId</td>
                 <td>@item.BlogTitle</td>
-                <td>@item.BlogCreateDate</td>
+                <td>@item.CreatedDate</td>
                 <td>@item.Category.CategoryName</td>
                 <td>@(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 30))...</td>
                 <td>
                     <a class="btn btn-warning" href="/blog/blogadd/@item.BlogId">update</a>
-                    <a class="btn btn-danger" href="#">delete</a>
+                    <a class="btn btn-danger" href="/blog/blogdelete/@item.BlogId">delete</a>
                 </td>
             </tr>
         }
