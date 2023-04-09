@@ -1,19 +1,43 @@
-﻿using DataAccessLayer.Abstract;
+﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class WriterManager
+    public class WriterManager : IWriterService
     {
-        IWriterDal _writerService;
-        public WriterManager(IWriterDal writerService)
+        IWriterDal _writerdal;
+        public WriterManager(IWriterDal writerdal)
         {
-            _writerService = writerService;
+            _writerdal = writerdal;
         }
 
-        public void WriterAdd(Writer writer)
+        public Writer GetByIdd(int id)
         {
-            _writerService.Insert(writer);
+            throw new NotImplementedException();
         }
+
+        public List<Writer> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Writer> GetWriterbyId(int id) => _writerdal.GetAll(x => x.Id == id);
+
+        public void TAdd(Writer t)
+        {
+            _writerdal.Insert(t);
+        }
+
+        public void TDelete(Writer t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Writer t)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

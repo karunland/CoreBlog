@@ -31,7 +31,7 @@ namespace error_fix_package.Controllers
                 }
                 writer.WriterStatus = true;
                 writer.WriterAbout = "test_writerabout";
-                _writerManager.WriterAdd(writer);
+                _writerManager.TAdd(writer);
                 return RedirectToAction("Index", "Blog");
             }
             else
