@@ -1,0 +1,47 @@
+﻿@model WebUI.Models.AddProfileImage
+
+@{
+    ViewData["Title"] = "WriterAdd";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            @if (ViewBag.Id == 0)
+            {
+                <h4 class="card-title">Add Profile</h4>
+            }
+            else
+            {
+                <h4 class="card-title">Edit Profile</h4>
+            }
+            <form class="forms-sample" asp-action="writeradd" enctype="multipart/form-data">
+                <input hidden asp-for="Id" />
+                <div class="form-group">
+                    <label for="WriterName">Full Name</label>
+                    <input type="text" class="form-control" asp-for="WriterName" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="WriterMail">Email address</label>
+                    <input type="email" class="form-control" asp-for="WriterMail" placeholder="Email" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="WriterPassword">Password</label>
+                    <input type="password" class="form-control" asp-for="WriterPassword" placeholder="Password" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="WriterImage">File upload</label>
+                    <input type="file" asp-for="WriterImage" />
+                </div>
+                <div class="form-group">
+                    <label for="WriterAbout">About</label>
+                    <textarea class="form-control" asp-for="WriterAbout" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

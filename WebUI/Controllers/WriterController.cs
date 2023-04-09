@@ -2,9 +2,11 @@
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -33,30 +35,56 @@ namespace WebUI.Controllers
         {
             return PartialView();
         }
+
         [HttpGet]
-        public IActionResult EditProfile()
+        public IActionResult WriterAdd(int? id)
         {
-            var val = wm.GetByIdd(1);
-            return View(val);
+            if (id != null)
+            {
+                var val = wm.GetByIdd((int)id);
+                AddProfileImage person = new AddProfileImage()
+                {
+                    WriterName = val.WriterName,
+                    WriterMail = val.WriterMail,
+                    WriterAbout = val.WriterAbout,
+                    Id = val.Id
+                };
+                ViewBag.Id = val.Id;
+                return View(person);
+            }
+            ViewBag.Id = 0;
+            return View();
         }
+
         [HttpPost]
-        public IActionResult EditProfile(Writer p)
+        public IActionResult WriterAdd(AddProfileImage p)
         {
+            Writer w = new Writer();
+
+            if (p.WriterImage != null)
+            {
+                var extension = Path.GetExtension(p.WriterImage.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var loc = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
+                var stream = new FileStream(loc, FileMode.Create);
+                p.WriterImage.CopyTo(stream);
+                w.WriterImage = newImageName;
+            }
+            w.WriterMail = p.WriterMail;
+            w.WriterName = p.WriterName;
+            w.WriterPassword = p.WriterPassword;
+            w.WriterStatus = p.WriterStatus;
+            w.WriterAbout = p.WriterAbout;
             WriterValidator validationRules = new WriterValidator();
-            var results = validationRules.Validate(p);
+            var results = validationRules.Validate(w);
             if (results.IsValid)
             {
-                wm.TAdd(p);
+                wm.TAdd(w);
                 return RedirectToAction("index", "dashboard");
             }
             else
-            {
                 foreach (var val in results.Errors)
-                {
                     ModelState.AddModelError(val.PropertyName, val.ErrorMessage);
-
-                }
-            }
             return View();
         }
     }
