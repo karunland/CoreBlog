@@ -27,14 +27,14 @@ namespace WebUI.Controllers
         {
             return View();
         }
-        public PartialViewResult WriterNavPartial()
-        {
-            return PartialView();
-        }
-        public PartialViewResult WriterFooterPartial()
-        {
-            return PartialView();
-        }
+        //public PartialViewResult WriterNavPartial()
+        //{
+        //    return PartialView();
+        //}
+        //public PartialViewResult WriterFooterPartial()
+        //{
+        //    return PartialView();
+        //}
 
         [HttpGet]
         public IActionResult WriterAdd(int? id)
