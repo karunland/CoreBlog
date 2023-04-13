@@ -11,19 +11,14 @@ namespace BusinessLayer.Concrete
 {
     public class MessageManager : IMessageService
     {
-        private readonly IMessageDal _messagedal;
+        readonly IMessageDal _messagedal;
 
         public MessageManager(IMessageDal messagedal)
         {
             _messagedal = messagedal;
         }
 
-        public IMessageService GetByIdd(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<IMessageService> GetList()
+        public Message GetByIdd(int id)
         {
             throw new NotImplementedException();
         }
@@ -33,17 +28,22 @@ namespace BusinessLayer.Concrete
             return _messagedal.GetAll(x => x.Sender == m);
         }
 
-        public void TAdd(IMessageService t)
+        public List<Message> GetList()
         {
             throw new NotImplementedException();
         }
 
-        public void TDelete(IMessageService t)
+        public void TAdd(Message t)
         {
             throw new NotImplementedException();
         }
 
-        public void TUpdate(IMessageService t)
+        public void TDelete(Message t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Message t)
         {
             throw new NotImplementedException();
         }
