@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,11 @@ namespace BusinessLayer.Concrete
 {
     public class NotificationManager : INotificationService
     {
-
+        INotificationDal _notificationdal;
+        public NotificationManager(INotificationDal notificationdal)
+        {
+            _notificationdal = notificationdal;
+        }
         public Notification GetByIdd(int id)
         {
             throw new NotImplementedException();
@@ -18,7 +23,7 @@ namespace BusinessLayer.Concrete
 
         public List<Notification> GetList()
         {
-            throw new NotImplementedException();
+            return _notificationdal.GetListAll();
         }
 
         public void TAdd(Notification t)
