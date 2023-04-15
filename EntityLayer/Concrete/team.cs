@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EntityLayer.Concrete
+{
+    public class team
+    {
+        [Key]
+        public int Id { get; set; }
+        public string teamName { get; set; }
+        public virtual ICollection<match> HomeMatches { get; set; }
+        public virtual ICollection<match> AwayMatches { get; set; }
+    }
+}

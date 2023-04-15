@@ -17,6 +17,23 @@ namespace DataAccessLayer.Concrete
                 "Initial Catalog=blogsite;" +
                 "integrated security=true;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<match>()
+                .HasOne(x => x.homeTeam)
+                .WithMany(y => y.HomeMatches)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasForeignKey(x => x.homeTeamId);
+            
+            modelBuilder.Entity<match>()
+                .HasOne(x => x.guestTeam)
+                .WithMany(y => y.AwayMatches)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasForeignKey(x => x.guestTeamId);
+        }
+
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Contact> Contacts { get; set; }
@@ -27,6 +44,8 @@ namespace DataAccessLayer.Concrete
         public DbSet<BlogRating> BlogRatings { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<match> Matches { get; set; }
+        public DbSet<team> teams { get; set; }
     }
 }
 
