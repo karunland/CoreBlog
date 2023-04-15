@@ -21,6 +21,7 @@ namespace DataAccessLayer.EntityFramework
                 return list;
             }
         }
+
         public List<Blog> GetAll(int WriterId)
         {
             using (var item = new Context())
@@ -53,12 +54,5 @@ namespace DataAccessLayer.EntityFramework
                 c.SaveChanges();
             }
         }
-        //public void Add(Blog model)
-        //{
-        //    using (var c = new Context())
-        //    {
-        //        if (model.BlogId == 0)
-        //    }
-        //}
     }
 }
