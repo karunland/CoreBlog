@@ -6,10 +6,10 @@ namespace WebUI.ViewComponents.Writer
 {
     public class WriterMessageNotification : ViewComponent
     {
-        MessageManager mm = new MessageManager(new EfMessageRepository());
+        Message2Manager mm = new Message2Manager(new EfMessage2Repository());
         public IViewComponentResult Invoke()
         {
-            return View(mm.GetInboxListByWriter("1harunkorkmaz@gmail.com"));
+            return View(mm.GetInboxListByWriter(2));
         }
     }
 }
