@@ -23,7 +23,7 @@ namespace BusinessLayer.Concrete
         }
         public Message2 GetByIdd(int id)
         {
-            throw new NotImplementedException();
+            return _message2dal.GetById(id);
         }
 
         public List<Message2> GetList()

@@ -30,8 +30,8 @@
                         <td> @item.Category.CategoryName </td>
                         <td> @(String.IsNullOrEmpty(@item.BlogContent) ? "No Content" : @item.BlogContent.Substring(0, 30))... </td>
                         <td>
-                            <a class="btn btn-warning btn-sm" href="/blog/blogadd/@item.Id">update</a>
-                            <a class="btn btn-danger btn-sm" href="/blog/blogdelete/@item.Id">delete</a>
+                            <a class="btn btn-warning btn-sm" href="/blog/blogadd/@item.Id">Update</a>
+                            <a class="btn btn-danger btn-sm" href="/blog/blogdelete/@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

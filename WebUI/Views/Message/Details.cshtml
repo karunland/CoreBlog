@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+@model EntityLayer.Concrete.Message2
+
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center gradient-custom-3">
+        <div class="container ">
+            <div class="row d-flex justify-content-center align-items-center ">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <div class="form-outline mb-4">
+                                <label class="mb-2">Message Id</label>
+                                @Html.TextAreaFor(x => x.Id, new { @class="form-control", disabled = "disabled" })
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="mb-2">Message Title</label>
+                                @Html.TextAreaFor(x => x.Subject, new { @class="form-control", disabled = "disabled" })
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="mb-2">Content</label>
+                                @Html.TextAreaFor(x => x.MessageDetails, 20, 3, new { @class="form-control", disabled = "disabled" })
+                            </div>
+
+                            <button type="submit" class="btn btn-primary submit mb-4">Return</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
