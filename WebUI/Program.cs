@@ -47,5 +47,12 @@ app.MapControllerRoute(
 
 app.UseAuthentication();
 app.UseSession();
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 app.Run();
+
