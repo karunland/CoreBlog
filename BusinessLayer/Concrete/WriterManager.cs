@@ -22,7 +22,7 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Writer> GetWriterbyId(int id) => _writerdal.GetAll(x => x.Id == id);
+        public Writer GetWriterbyId(int id) => _writerdal.GetById(id);
 
         public void TAdd(Writer t)
         {

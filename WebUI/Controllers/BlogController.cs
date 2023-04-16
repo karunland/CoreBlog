@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,10 @@ namespace WebUI.Controllers
 
         public IActionResult GetBLogByWriter(int id)
         {
-            return View(_blogManager.GetBlogByWriter(1));
+            Context c = new Context();
+            var usermail = User.Identity?.Name;
+            var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
+            return View(_blogManager.GetBlogByWriter(userid));
         }
         [HttpGet]
         public IActionResult BlogAdd(int? id)
@@ -36,11 +40,15 @@ namespace WebUI.Controllers
                                                        Text = x.CategoryName,
                                                        Value = x.Id.ToString()
                                                    }).ToList();
-            ViewBag.id = 1;
+            var usermail = User.Identity?.Name;
+            Context c = new Context();
+            var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
+
+            ViewBag.id = userid;
             ViewBag.cv = categoryValues;
             if (id != 0 && id != null)
             {
-                var item = _blogManager.GetBlogById((int)id);
+                var item = _blogManager.GetBlogById((int)userid);
                 return View(item);
             }
             return View();
@@ -54,7 +62,6 @@ namespace WebUI.Controllers
             if (results.IsValid)
             {
                 p.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                p.WriterId = 1;
                 _blogManager.TAdd(p);
                 return RedirectToAction("GetBlogByWriter", "Blog");
             }

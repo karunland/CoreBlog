@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation;
@@ -10,38 +11,36 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-
-    //[Authorize]
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
+        
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
+        
         public IActionResult WriterProfile(int? id)
         {
             return View();
         }
+
         public IActionResult Test(int? id)
         {
             return View();
         }
-        //public PartialViewResult WriterNavPartial()
-        //{
-        //    return PartialView();
-        //}
-        //public PartialViewResult WriterFooterPartial()
-        //{
-        //    return PartialView();
-        //}
-
+        
         [HttpGet]
         public IActionResult WriterAdd(int? id)
         {
             if (id != null)
             {
-                var val = wm.GetByIdd((int)id);
+                var usermail = User.Identity?.Name;
+                Context c = new Context();
+                var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
+                var val = wm.GetByIdd(userid);
+
                 AddProfileImage person = new AddProfileImage()
                 {
                     WriterName = val.WriterName,
