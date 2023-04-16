@@ -31,9 +31,16 @@
             }
         </table>
     </div>
+    <div class="row">
+        <div class="ml-auto">
+            <a class="btn btn-info btn-lg" href="/Admin/Category/Add">Add</a>
+        </div>
+    </div>
     <br />
     <div class="row">
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new {page}))
+        <div class="ml-auto">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new {page}))
+        </div>
     </div>
 </div>
 
