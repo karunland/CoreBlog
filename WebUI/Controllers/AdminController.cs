@@ -8,5 +8,11 @@ namespace WebUI.Controllers
         {
             return View();
         }
+
+        //public IActionResult AdminNavbarPartial()
+        //{
+        //    return PartialView("_AdminNavbarPartial");
+        //}
+
     }
 }
