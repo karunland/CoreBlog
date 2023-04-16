@@ -1,29 +1,39 @@
-﻿@model List<EntityLayer.Concrete.Category>
+﻿@using X.PagedList
+@using EntityLayer.Concrete
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<Category>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
 <div class="container-fluid">
-    <table class="table table-bordered">
-        <tr>
-            <th> Id </th>
-            <th> Name </th>
-            <th> Active </th>
-            <th> Passive </th>
-            <th> Action </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <div class="row">
+        <table class="table table-bordered">
             <tr>
-                <td> @item.Id </td>
-                <td> @item.CategoryName </td>
-                <td> <a href="#" class="btn btn-github" > activate </a> </td>
-                <td> <a href="#" class="btn btn-foursquare"> Passive </a> </td>
-                <td> <a href="#" class="btn btn-success" > Action </a> </td>
+                <th> Id </th>
+                <th> Name </th>
+                <th> Active </th>
+                <th> Passive </th>
+                <th> Action </th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.Id </td>
+                    <td> @item.CategoryName </td>
+                    <td> <a href="#" class="btn btn-github"> activate </a> </td>
+                    <td> <a href="#" class="btn btn-foursquare"> Passive </a> </td>
+                    <td> <a href="#" class="btn btn-success"> Action </a> </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br />
+    <div class="row">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new {page}))
+    </div>
 </div>
 
