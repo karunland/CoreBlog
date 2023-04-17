@@ -9,14 +9,12 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <table class="table table-bordered">
             <tr>
                 <th> Id </th>
                 <th> Name </th>
-                <th> Active </th>
-                <th> Passive </th>
                 <th> Action </th>
             </tr>
             @foreach (var item in Model)
@@ -24,9 +22,11 @@
                 <tr>
                     <td> @item.Id </td>
                     <td> @item.CategoryName </td>
-                    <td> <a href="#" class="btn btn-github"> activate </a> </td>
-                    <td> <a href="#" class="btn btn-foursquare"> Passive </a> </td>
-                    <td> <a href="#" class="btn btn-success"> Action </a> </td>
+                    <td>
+                        <a href="#" class="btn btn-outline-primary"> activate </a>
+                        <a href="/admin/category/delete/@item.Id" onclick="return confirm('Are you sure?');" class="btn btn-outline-danger"> Delete </a>
+                        <a href="#" class="btn btn-success"> Action </a>
+                    </td>
                 </tr>
             }
         </table>

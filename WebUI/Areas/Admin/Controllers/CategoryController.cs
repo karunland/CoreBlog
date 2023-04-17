@@ -47,5 +47,12 @@ namespace WebUI.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        [Route("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            _categoryManager.TDelete(_categoryManager.GetByIdd(id));
+            return RedirectToAction("Index");
+        }
     }
 }
