@@ -8,6 +8,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container">
     <div class="row">
@@ -24,7 +25,7 @@
                     <td> @item.CategoryName </td>
                     <td>
                         <a href="#" class="btn btn-outline-primary"> activate </a>
-                        <a href="/admin/category/delete/@item.Id" onclick="return confirm('Are you sure?');" class="btn btn-outline-danger"> Delete </a>
+                        <button id="deleteButton" onclick="myFunc(@item.Id)" class="btn btn-outline-danger"> Delete </button>
                         <a href="#" class="btn btn-success"> Action </a>
                     </td>
                 </tr>
@@ -44,3 +45,50 @@
     </div>
 </div>
 
+<script>
+
+    function myFunc(Id) {
+        Swal.fire({
+            title: "Delete?",
+            text: "Please ensure and then confirm!",
+            type: "warning",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            showCancelButton: true
+        }).then(function (e) {
+
+            if (e.isConfirmed == true) {
+                debugger;
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/Admin/Category/Delete/" + Id,
+                    //dataType: 'JSON',
+                    success: function (e) {
+                        //if (e.success === true) {
+                        Swal.fire({
+                            title: 'Done!',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
+                        //}
+                    },
+                    error: function (e) {
+                        debugger;
+                        Swal.fire({
+                            title: 'Error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+</script>

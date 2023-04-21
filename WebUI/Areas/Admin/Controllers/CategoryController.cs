@@ -48,11 +48,11 @@ namespace WebUI.Areas.Admin.Controllers
             }
         }
 
-        [Route("Delete/{id}")]
+        [HttpPost("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             _categoryManager.TDelete(_categoryManager.GetByIdd(id));
-            return RedirectToAction("Index");
+            return Ok();
         }
     }
 }
