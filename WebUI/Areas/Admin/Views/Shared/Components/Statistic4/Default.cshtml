@@ -4,11 +4,11 @@
         <div class="widget-head-color-box navy-bg p-lg text-center">
             <div class="m-b-md">
                 <h2 class="font-bold no-margins">
-                    Alex Smith
+                    @ViewBag.v1?.Name
                 </h2>
                 <small>Founder of Groupeq</small>
             </div>
-            <img src="~/admin/img/a4.jpg" class="rounded-circle circle-border m-b-md" alt="profile">
+            <img src="@ViewBag.v1?.ImageUrl" class="rounded-circle circle-border m-b-md" alt="profile">
             <div>
                 <span>100 Tweets</span> |
                 <span>350 Following</span> |
@@ -16,8 +16,8 @@
             </div>
         </div>
         <div class="widget-text-box">
-            <h4 class="media-heading">Alex Smith</h4>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <h4 class="media-heading">@ViewBag.v1?.UserName</h4>
+            <p>@ViewBag.v1?.ShortDescription</p>
             <div class="text-right">
                 <a href="#" class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
                 <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-heart"></i> Love</a>
