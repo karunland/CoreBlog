@@ -52,7 +52,7 @@ namespace WebUI.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             _categoryManager.TDelete(_categoryManager.GetByIdd(id));
-            return Ok();
+            return RedirectToAction("Index");
         }
     }
 }
