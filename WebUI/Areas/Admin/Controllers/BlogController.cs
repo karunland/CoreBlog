@@ -7,10 +7,10 @@ using DataAccessLayer.Concrete;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/[controller]")]
+    //[Route("/Admin/[Controller]/")]
     public class BlogController : Controller
     {
-        [HttpGet("ExportStaticExcelBlog/")]
+        //[HttpGet("ExportStaticExcelBlog/")]
         public IActionResult ExportStaticExcelBlog()
         {
 
@@ -46,7 +46,7 @@ namespace WebUI.Areas.Admin.Controllers
             }
         }
 
-        [HttpGet("BlogListExcel/")]
+        //[HttpGet("BlogListExcel/")]
         public IActionResult BlogListExcel()
         {
             return View();
