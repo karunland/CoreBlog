@@ -2,6 +2,7 @@
 using ClosedXML;
 using ClosedXML.Excel;
 using WebUI.Areas.Admin.Models;
+using DataAccessLayer.Concrete;
 
 namespace WebUI.Areas.Admin.Controllers
 {
@@ -38,12 +39,11 @@ namespace WebUI.Areas.Admin.Controllers
 
         List<BlogModel> GetBlogList()
         {
-            return new List<BlogModel>
+            using (var context = new Context())
             {
-                new BlogModel { Id = 0, Name = "C# girisi 101"}
-                , new BlogModel { Id = 1, Name = "New Cars with electricty"}
-                , new BlogModel { Id = 2, Name = "C/C++ girisi 101"}
-            };
+                var temp = context.Blogs.Select(x => new BlogModel { Id = x.Id, Name = x.BlogTitle }).ToList();
+                return temp;
+            }
         }
 
         [HttpGet("BlogListExcel/")]

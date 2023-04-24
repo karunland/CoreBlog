@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context: DbContext
+    public class Context : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,7 +25,7 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.HomeMatches)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasForeignKey(x => x.homeTeamId);
-            
+
             modelBuilder.Entity<match>()
                 .HasOne(x => x.guestTeam)
                 .WithMany(y => y.AwayMatches)

@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+//using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+//using System.Configuration;
+//using WebUI.Controllers;
+//using WebUI.Areas.Admin.Models;
+//using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +26,11 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 
 });
+
+//builder.Services.AddDbContext<AdminContext>(options =>
+//    options.UseSqlServer("server=(localdb)\\MSSQLLocalDB;" +
+//                "Initial Catalog=blogsite;" +
+//                "integrated security=true;"));
 
 var app = builder.Build();
 
