@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<btn typeof="button" class="btn btn-primary" id="mbutton">Click</btn>
+
+<script>
+    $(document).ready(function () {
+        $('#mbutton').onclick(function () {
+            $.ajax({
+                type: 'Get',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '/admin/writer/WriterList',
+                success: function (e) {
+                    console.log(e);
+                }
+            });
+        });
+    });
+</script>
