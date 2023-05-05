@@ -15,6 +15,8 @@
 <button class="btn btn-primary" id="getUserButton">
     Click
 </button>
+<div id="getbyid">
+</div>
 
 <script>
     $('#getUserButton').click(x => {
@@ -29,7 +31,20 @@
             success: function (e) {
                 debugger;
                 var b = jQuery.parseJSON(e);
-                alert(b);
+                let getValue = `
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Yazar Id</th>
+                                    <th>Yazar Id</th>
+                                </tr>
+                                    <tr>
+                                        <td>${b.Id}</td>
+                                        <td>${b.Name}</td>
+                                    </tr>
+                            </table>
+                            `;
+                $('#getbyid').html(getValue);
+
             }
         });
     });
@@ -45,7 +60,7 @@
                 debugger;
                 let w = jQuery.parseJSON(func);
                 console.log(w);
-                let tablehtml = "<div class='ibox-title'><h5>Yazar Listesi</h5></div><div class='ibox-content'><table class='table'><thead><tr><th> Yazar ID</th> <th> Yazar Adı </th></tr></thead>";
+                let tablehtml = "<div class='ibox-title'><h5>Yazar Listesi</h5></div><div class='ibox-content'><table class='table table-bordered'><thead><tr><th> Yazar ID</th> <th> Yazar Adı </th></tr></thead>";
                 $.each(w, (index, value) => {
                     tablehtml += `<tr><td>${value.Id}</td> <td>${value.Name}</td></tr>`
                 });
