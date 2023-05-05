@@ -1,23 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebUI.Areas.Admin.Models;
 
 namespace WebUI.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [AllowAnonymous]
+    [Route("/Admin/[Controller]/[Action]")]
     public class WriterController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult WriterList()
-        {
-            var jsonwriter = JsonConvert.SerializeObject(writers);
-
-            return View(jsonwriter);
-        }
-
         public static List<WriterClass> writers = new List<WriterClass>
         {
             new WriterClass
@@ -36,5 +32,11 @@ namespace WebUI.Areas.Admin.Controllers
                 Name = "max"
             }
         };
+        [HttpGet("/WriterList")]
+        public IActionResult WriterList()
+        {
+            var jsonwriter = JsonConvert.SerializeObject(writers);
+            return Json(jsonwriter);
+        }
     }
 }

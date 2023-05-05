@@ -1,22 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Index";
+    //Layout = null;
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<div class="container">
+    <button class="btn btn-primary" id="mbutton">
+        Click
+    </button>
 
-<btn typeof="button" class="btn btn-primary" id="mbutton">Click</btn>
+    <div id="writerlist">
+    </div>
+</div>
 
 <script>
-    $(document).ready(function () {
-        $('#mbutton').onclick(function () {
-            $.ajax({
-                type: 'Get',
-                dataType: 'json',
-                contentType: 'application/json',
-                url: '/admin/writer/WriterList',
-                success: function (e) {
-                    console.log(e);
-                }
-            });
+
+    $("#mbutton").click(function () {
+        debugger;
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/WriterList",
+            success: function (func) {
+                debugger;
+                let w = jQuery.parseJSON(func);
+                console.log(w);
+                let tablehtml = "<div class='ibox-title'><h5>Yazar Listesi</h5></div><div class='ibox-content'><table class='table'><thead><tr><th> Yazar ID</th> <th> Yazar Adı </th></tr></thead>";
+                $.each(w, (index, value) => {
+                    tablehtml += `<tr><td>${value.Id}</td> <td>${value.Name}</td></tr>`
+                });
+                tablehtml += "</table></div>";
+                $("#writerlist").html(tablehtml);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
         });
     });
 </script>
