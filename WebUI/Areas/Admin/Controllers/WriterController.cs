@@ -7,7 +7,7 @@ namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AllowAnonymous]
-    [Route("/Admin/[Controller]/[Action]")]
+    [Route("/Admin/[Controller]/[Action]/")]
     public class WriterController : Controller
     {
         public IActionResult Index()
@@ -32,11 +32,19 @@ namespace WebUI.Areas.Admin.Controllers
                 Name = "max"
             }
         };
-        [HttpGet("/WriterList")]
+
         public IActionResult WriterList()
         {
             var jsonwriter = JsonConvert.SerializeObject(writers);
             return Json(jsonwriter);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetWriterById(int id)
+        {
+            var writer = writers.FirstOrDefault(x=>x.Id == id);
+            var json = JsonConvert.SerializeObject(writer);
+            return Json(json);
         }
     }
 }

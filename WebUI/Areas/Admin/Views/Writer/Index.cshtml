@@ -3,24 +3,44 @@
     //Layout = null;
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<div class="container">
-    <button class="btn btn-primary" id="mbutton">
-        Click
-    </button>
+<button class="btn btn-primary" id="mbutton">
+    Click
+</button>
 
-    <div id="writerlist">
-    </div>
+<div id="writerlist">
 </div>
 
-<script>
+<label for="getUserInfo"> User's Id </label>
+<input id="IdInput" class="form-control" type="text" />
+<button class="btn btn-primary" id="getUserButton">
+    Click
+</button>
 
-    $("#mbutton").click(function () {
+<script>
+    $('#getUserButton').click(x => {
+        let a = $('#IdInput').val();
         debugger;
         $.ajax({
             contentType: "application/json",
             dataType: "json",
             type: "Get",
-            url: "/WriterList",
+            url: "/admin/writer/GetWriterById/" + a,
+            //data: { id: a },
+            success: function (e) {
+                debugger;
+                var b = jQuery.parseJSON(e);
+                alert(b);
+            }
+        });
+    });
+    $("#mbutton").click(function () {
+        debugger;
+
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Admin/Writer/WriterList",
             success: function (func) {
                 debugger;
                 let w = jQuery.parseJSON(func);
