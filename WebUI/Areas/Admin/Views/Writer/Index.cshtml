@@ -11,7 +11,6 @@
             <button class="btn btn-primary" id="mbutton">
                 All Writers
             </button>
-
         </div>
         <div class="col-md-6">
             <input id="IdInput" class="form-control" type="text" />
@@ -34,6 +33,16 @@
         <div class="col-md-6 offset-2 d-flex justify-content-end">
             <button class="btn btn-primary btn-sm " id="PostButton" type="submit">Save <i class="fa fa-check"></i></button>
         </div>
+        
+    </div>
+    <div class="row mt-10">
+        <div class="col-md-6 offset-2">
+            <label for="" class="fs-7 fw-bold mb-2">Delete Writer Id</label>
+            <input type="text" class="form-control form-control-sm form-control-solid" id="writerDeleteId">
+        </div>
+        <div class="col-md-6 offset-2 d-flex justify-content-end">
+            <button class="btn btn-primary btn-sm " id="DeleteButton" type="submit">Save <i class="fa fa-check"></i></button>
+        </div>
     </div>
 </div>
 
@@ -53,17 +62,17 @@
                 debugger;
                 var b = jQuery.parseJSON(e);
                 let getValue = `
-                                                    <table class="table table-bordered">
-                                                        <tr>
-                                                            <th>Yazar Id</th>
-                                                            <th>Yazar Id</th>
-                                                        </tr>
+                                                        <table class="table table-bordered">
                                                             <tr>
-                                                                <td>${b.Id}</td>
-                                                                <td>${b.Name}</td>
+                                                                <th>Yazar Id</th>
+                                                                <th>Yazar Id</th>
                                                             </tr>
-                                                    </table>
-                                                    `;
+                                                                <tr>
+                                                                    <td>${b.Id}</td>
+                                                                    <td>${b.Name}</td>
+                                                                </tr>
+                                                        </table>
+                                                        `;
                 $('#getbyid').html(getValue);
 
             }
@@ -106,6 +115,18 @@
             type: 'Post',
             url: '/admin/writer/AddWriter',
             data: writer,
+            success: function (e) {
+                let result = jQuery.parseJSON(e);
+                alert(result);
+            }
+        });
+    });
+
+    $('#DeleteButton').click(function () {
+        $.ajax({
+            type: 'Delete',
+            dataType: "json",
+            url: '/admin/writer/DeleteWriter/' + $('#writerDeleteId').val(),
             success: function (e) {
                 let result = jQuery.parseJSON(e);
                 alert(result);

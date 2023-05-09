@@ -42,7 +42,7 @@ namespace WebUI.Areas.Admin.Controllers
         [HttpGet("{id}")]
         public IActionResult GetWriterById(int id)
         {
-            var writer = writers.FirstOrDefault(x=>x.Id == id);
+            var writer = writers.FirstOrDefault(x => x.Id == id);
             var json = JsonConvert.SerializeObject(writer);
             return Json(json);
         }
@@ -52,6 +52,15 @@ namespace WebUI.Areas.Admin.Controllers
             writers.Add(writer);
             var jsonWriter = JsonConvert.SerializeObject(writers);
             return Json(jsonWriter);
+        }
+        [HttpDelete, Route("{id}")]
+        public IActionResult DeleteWriter(int id)
+        {
+            var model = writers.FirstOrDefault(x => x.Id == id);
+            if (model == null)
+                return NotFound();
+            writers.Remove(model);
+            return Json(model);
         }
     }
 }
