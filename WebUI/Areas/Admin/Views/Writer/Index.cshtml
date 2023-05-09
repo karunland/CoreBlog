@@ -3,22 +3,43 @@
     //Layout = null;
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<button class="btn btn-primary" id="mbutton">
-    Click
-</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="writerlist">
+            </div>
+            <button class="btn btn-primary" id="mbutton">
+                All Writers
+            </button>
 
-<div id="writerlist">
+        </div>
+        <div class="col-md-6">
+            <input id="IdInput" class="form-control" type="text" />
+            <button class="btn btn-primary" id="getUserButton">
+                Send
+            </button>
+            <div id="getbyid">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-10">
+        <div class="col-md-6 offset-2">
+            <label for="" class="fs-7 fw-bold mb-2">Writer Id</label>
+            <input type="text" class="form-control form-control-sm form-control-solid" id="writerId">
+        </div>
+        <div class="col-md-6 offset-2">
+            <label for="" class="fs-7 fw-bold mb-2">Writer Name</label>
+            <input type="text" class="form-control form-control-sm form-control-solid" id="writerName">
+        </div>
+        <div class="col-md-6 offset-2 d-flex justify-content-end">
+            <button class="btn btn-primary btn-sm " id="PostButton" type="submit">Save <i class="fa fa-check"></i></button>
+        </div>
+    </div>
 </div>
 
-<label for="getUserInfo"> User's Id </label>
-<input id="IdInput" class="form-control" type="text" />
-<button class="btn btn-primary" id="getUserButton">
-    Click
-</button>
-<div id="getbyid">
-</div>
 
 <script>
+
     $('#getUserButton').click(x => {
         let a = $('#IdInput').val();
         debugger;
@@ -32,22 +53,23 @@
                 debugger;
                 var b = jQuery.parseJSON(e);
                 let getValue = `
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Yazar Id</th>
-                                    <th>Yazar Id</th>
-                                </tr>
-                                    <tr>
-                                        <td>${b.Id}</td>
-                                        <td>${b.Name}</td>
-                                    </tr>
-                            </table>
-                            `;
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>Yazar Id</th>
+                                                            <th>Yazar Id</th>
+                                                        </tr>
+                                                            <tr>
+                                                                <td>${b.Id}</td>
+                                                                <td>${b.Name}</td>
+                                                            </tr>
+                                                    </table>
+                                                    `;
                 $('#getbyid').html(getValue);
 
             }
         });
     });
+
     $("#mbutton").click(function () {
         debugger;
 
@@ -70,6 +92,23 @@
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
                 alert(thrownError);
+            }
+        });
+    });
+
+    $('#PostButton').click(function () {
+        let writer = {
+            Id: $('#writerId').val(),
+            Name: $('#writerName').val()
+        };
+        debugger;
+        $.ajax({
+            type: 'Post',
+            url: '/admin/writer/AddWriter',
+            data: writer,
+            success: function (e) {
+                let result = jQuery.parseJSON(e);
+                alert(result);
             }
         });
     });

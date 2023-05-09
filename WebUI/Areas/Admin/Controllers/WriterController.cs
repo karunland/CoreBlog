@@ -46,5 +46,12 @@ namespace WebUI.Areas.Admin.Controllers
             var json = JsonConvert.SerializeObject(writer);
             return Json(json);
         }
+        [HttpPost]
+        public IActionResult AddWriter(WriterClass writer)
+        {
+            writers.Add(writer);
+            var jsonWriter = JsonConvert.SerializeObject(writers);
+            return Json(jsonWriter);
+        }
     }
 }
