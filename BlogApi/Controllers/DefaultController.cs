@@ -27,8 +27,8 @@ namespace BlogApi.Controllers
                     return BadRequest();
                 context.Employees.Add(model);
                 context.SaveChanges();
-                return Ok(model);
             }
+            return Ok(model);
         }
     }
 }
