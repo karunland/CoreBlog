@@ -16,5 +16,19 @@ namespace BlogApi.Controllers
                 return Ok(items);
             }
         }
+
+        [HttpPost]
+        public IActionResult EmployeeAdd(Employee model)
+        {
+            using (var context = new Context())
+            {
+                bool user = context.Employees.Where(x => x.Id == model.Id).Any();
+                if (user)
+                    return BadRequest();
+                context.Employees.Add(model);
+                context.SaveChanges();
+                return Ok(model);
+            }
+        }
     }
 }
