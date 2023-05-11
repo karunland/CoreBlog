@@ -41,5 +41,37 @@ namespace BlogApi.Controllers
                 return user == null ? NotFound() : Ok(user);
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            using (var context = new Context())
+            {
+                var user = context.Employees.FirstOrDefault(e => e.Id == id);
+                if (user == null)
+                    return NotFound();
+
+                context.Employees.Remove(user);
+                context.SaveChanges();
+
+                return NoContent();
+            }
+        }
+
+        [HttpPut]
+        public IActionResult EmployeeUpdate(Employee model)
+        {
+            using (var context = new Context())
+            {
+                var item = context.Employees.FirstOrDefault(o => o.Id == model.Id);
+                if (item == null)
+                    return NotFound();
+                item.Name = model.Name;
+                context.Employees.Update(item);
+                context.SaveChanges();
+                return Ok(item);
+            }   
+        }
+
     }
 }
