@@ -1,5 +1,6 @@
 ﻿using BlogApi.DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BlogApi.Controllers
 {
@@ -24,11 +25,21 @@ namespace BlogApi.Controllers
             {
                 bool user = context.Employees.Where(x => x.Id == model.Id).Any();
                 if (user)
-                    return BadRequest();
+                    return NotFound();
                 context.Employees.Add(model);
                 context.SaveChanges();
             }
             return Ok(model);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetEmployeeById(int id)
+        {
+            using (var context = new Context())
+            {
+                var user = context.Employees.Where(x => x.Id == id).FirstOrDefault();
+                return user == null ? NotFound() : Ok(user);
+            }
         }
     }
 }
