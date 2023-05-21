@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "add";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@model WebUI.Controllers.Class1
+
+<form class="form" method="post" href="/test/add">
+    <div class="form-control">
+        <label class="form-label" for="Name"> full name</label>
+        <input class="form-label" type="text" name="Name" id="Name" placeholder="name" />
+    </div>
+    <div class="form-control">
+
+        <buttton class="btn btn-primary">Save</buttton>
+    </div>
+</form>

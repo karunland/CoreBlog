@@ -30,6 +30,7 @@ namespace WebUI.Controllers
             var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
             return View(_blogManager.GetBlogByWriter(userid));
         }
+
         [HttpGet]
         public IActionResult BlogAdd(int? id)
         {

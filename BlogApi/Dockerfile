@@ -1,22 +1,14 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+﻿    FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build-env
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["BlogApi/BlogApi.csproj", "BlogApi/"]
-RUN dotnet restore "BlogApi/BlogApi.csproj"
-COPY . .
-WORKDIR "/src/BlogApi"
-RUN dotnet build "BlogApi.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "BlogApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BlogApi.dll"]
+    WORKDIR /app
+    COPY *.csproj ./
+    RUN dotnet restore
+    COPY . ./
+    RUN dotnet publish ./BlogApi --configuration Release --output ./out
+    
+    FROM mcr.microsoft.com/dotnet/aspnet:3.1
+    WORKDIR /app
+    EXPOSE 5010/tcp
+    ENV ASPNETCORE_URLS http://*:5010
+    COPY —-from=build-env /app/out .
+    ENTRYPOINT [“dotnet”, “ProductsAPIServices.dll”]

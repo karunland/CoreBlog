@@ -1,36 +1,30 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
-//using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-//using System.Configuration;
-//using WebUI.Controllers;
-//using WebUI.Areas.Admin.Models;
-//using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// ders 46
 builder.Services.AddSession();
-builder.Services.AddMvc();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
-    x => x.LoginPath = "/Login/Index"
-);
 
+// ders 45
 builder.Services.AddMvc(config =>
 {
     var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
     config.Filters.Add(new AuthorizeFilter(policy));
-
 });
 
-//builder.Services.AddDbContext<AdminContext>(options =>
-//    options.UseSqlServer("server=(localdb)\\MSSQLLocalDB;" +
-//                "Initial Catalog=blogsite;" +
-//                "integrated security=true;"));
+builder.Services.AddMvc();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    x => x.LoginPath = "/Login/Index"
+);
+
 
 var app = builder.Build();
 
@@ -56,6 +50,8 @@ app.MapControllerRoute(
     pattern: "{controller=login}/{action=index}/{id?}");
 
 app.UseAuthentication();
+
+// ders 46
 app.UseSession();
 app.UseEndpoints(endpoints =>
 {
