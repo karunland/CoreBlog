@@ -18,27 +18,59 @@ namespace WebUI.Controllers
             return View(values);
         }
 
-        [HttpGet, Route("/test/add")]
-        public async Task<IActionResult> add()
+        [HttpGet, Route("/test/add/{id?}")]
+        public async Task<IActionResult> add(int? id)
         {
+            if (id != null && id != 0)
+            {
+                var httpClient = new HttpClient();
+                var responseMessage = await httpClient.GetAsync($"https://localhost:7051/api/Default/GetEmployeeById/{id}" );
+                var jsonString = await responseMessage.Content.ReadAsStringAsync();
+                var value = JsonConvert.DeserializeObject<Class1>(jsonString);
+                return View(value);
+            }
             return View();
         }
 
-
         [HttpPost, Route("/test/add")]
-        public async Task<IActionResult> add([FromForm] Class1 person)
+        public async Task<IActionResult> add(Class1 person)
         {
             var httpClient = new HttpClient();
             var stringa = JsonConvert.SerializeObject(person);
-
             var jsonEmployee = new StringContent(stringa, Encoding.UTF8, "application/json");
 
-            await httpClient.PostAsync($"https://localhost:7051/api/Default/Add", jsonEmployee);
+            var response = await httpClient.PostAsync($"https://localhost:7051/api/Default/Add", jsonEmployee);
+            if (response.IsSuccessStatusCode)
+            {
+                RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [Route("/test/delete/{id}")]
+        public async Task<IActionResult> delete(int id)
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.DeleteAsync($"https://localhost:7051/api/Default/delete/" + id);
+            if (response.IsSuccessStatusCode)
+            {
+                RedirectToAction("Index");
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("/editProfile")]
+        public async Task<IActionResult> editEmployee(Class1 person)
+        {
+            var httpClient = new HttpClient();
+            var stringa = JsonConvert.SerializeObject(person);
+            var jsonEmployee = new StringContent(stringa, Encoding.UTF8, "application/json");
+            await httpClient.PutAsync($"https://localhost:7051/api/Default/EmployeeUpdate", jsonEmployee);
 
             return View();
         }
     }
-
 
     public class Class1
     {

@@ -32,7 +32,7 @@ namespace BlogApi.Controllers
             return Ok(model);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet, Route("{id}")]
         public IActionResult GetEmployeeById(int id)
         {
             using (var context = new Context())
@@ -42,7 +42,7 @@ namespace BlogApi.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             using (var context = new Context())
@@ -54,7 +54,7 @@ namespace BlogApi.Controllers
                 context.Employees.Remove(user);
                 context.SaveChanges();
 
-                return NoContent();
+                return Ok();
             }
         }
 
