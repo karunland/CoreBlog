@@ -23,6 +23,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
+        [Route("/RegisterUser")]
         public async Task<IActionResult> Index(UserSignUpViewModel model)
         {
             if (ModelState.IsValid)
@@ -31,12 +32,13 @@ namespace WebUI.Controllers
                 {
                     Email = model.Mail,
                     FullName = model.FullName,
-                    UserName = model.UserName
+                    UserName = model.UserName,
+                    ImageUrl = "aa"
                 };
                 var result = await _userManger.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Blog");
+                    return RedirectToAction("Index", "Login");
                 }
                 else
                 {
