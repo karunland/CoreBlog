@@ -3,12 +3,14 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EfBlogRepository());
@@ -64,6 +66,14 @@ namespace WebUI.Controllers
             {
                 p.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 _blogManager.TAdd(p);
+                // sql trigger sildigim icin burda kendim ekleme yapiyorum
+                using (var context = new Context())
+                {
+                    BlogRating newRatingRow = new BlogRating { BLogId = p.Id, RatingCount = 0, TotalScore = 0 };
+                    context.BlogRatings.Add(newRatingRow);
+                    context.SaveChanges();
+                }
+                
                 return RedirectToAction("GetBlogByWriter", "Blog");
             }
             else
