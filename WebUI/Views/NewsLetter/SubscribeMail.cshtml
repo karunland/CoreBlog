@@ -7,7 +7,28 @@
     <p>Tech, Software and other blogs</p>
     <form action="/NewsLetter/SubscribeMail/" method="post">
         <input hidden name="BlogId" value="BlogId">
-        <input type="email" placeholder="Email" required="" name="Mail">
-        <input type="submit" value="Subscribe">
+        <input type="email" placeholder="Email" required="" name="Mail" id="Mail">
+        @*<input type="submit" value="Subscribe">*@
+        <button id="SubscribeButton" class="btn btn-success">Subscribe</button>
     </form>
 </div>
+
+<script>
+    $('#SubscribeButton').on('click', function (event) {
+        event.preventDefault();
+        
+        let values = {
+            Mail: $('#Mail').val()
+        };
+
+        $.ajax({
+            type: 'post',
+            url: '/NewsLetter/SubscribeMail',
+            data: values,
+            success: function (func){
+                debugger;
+                let res = jQuery.parseJSON(func);
+            }
+        });
+    });
+</script>

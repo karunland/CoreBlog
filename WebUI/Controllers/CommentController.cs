@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class CommentController: Controller
+    public class CommentController : Controller
     {
         CommentManager cm = new CommentManager(new EfCommentRepository());
 
@@ -26,8 +26,10 @@ namespace WebUI.Controllers
         {
             model.CommentStatus = true;
             model.CommentDate = DateTime.Now;
+            if (model.Score == null || model.Score == 0)
+                model.Score = 5;
             cm.CommentAdd(model);
-            return RedirectToAction("Details", "Blog", new { id = model.BlogId});
+            return RedirectToAction("Details", "Blog", new { id = model.BlogId });
         }
     }
 }
