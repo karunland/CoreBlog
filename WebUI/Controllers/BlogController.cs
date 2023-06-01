@@ -26,8 +26,8 @@ namespace WebUI.Controllers
         public IActionResult GetBLogByWriter(int id)
         {
             Context c = new Context();
-            var usermail = User.Identity?.Name;
-            var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
+            var userName = User.Identity?.Name;
+            var userid = c.Writers.Where(x => x.WriterName == userName).Select(y => y.Id).FirstOrDefault();
             return View(_blogManager.GetBlogByWriter(userid));
         }
 
@@ -41,9 +41,9 @@ namespace WebUI.Controllers
                                                        Text = x.CategoryName,
                                                        Value = x.Id.ToString()
                                                    }).ToList();
-            var usermail = User.Identity?.Name;
+            var userName = User.Identity?.Name;
             Context c = new Context();
-            var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
+            var userid = c.Writers.Where(x => x.WriterName == userName).Select(y => y.Id).FirstOrDefault();
 
             ViewBag.id = userid;
             ViewBag.cv = categoryValues;
