@@ -36,9 +36,9 @@ namespace WebUI.Controllers
         {
             if (id != null)
             {
-                var usermail = User.Identity?.Name;
+                var userName = User.Identity?.Name;
                 Context c = new Context();
-                var userid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.Id).FirstOrDefault();
+                var userid = c.Writers.Where(x => x.WriterName == userName).Select(y => y.Id).FirstOrDefault();
                 var val = wm.GetByIdd(userid);
 
                 AddProfileImage person = new AddProfileImage()
