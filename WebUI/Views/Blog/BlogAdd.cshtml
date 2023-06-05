@@ -14,7 +14,7 @@
                         <div class="card-body p-5">
                             @using (Html.BeginForm("BlogAdd", "Blog", FormMethod.Post))
                             {
-                                <input hidden type="text" name="WriterId" value="@ViewBag.id">
+                                @*<input hidden type="text" name="WriterId" value="@ViewBag.id">*@
                                 <div class="form-outline mb-4">
                                     <label class="mb-2">Title</label>
                                     @Html.TextBoxFor(x => x.BlogTitle, new { @class="form-control"})

@@ -25,7 +25,7 @@ namespace WebUI.Controllers
             return View(_blogManager.GetBlogById(id));
         }
 
-        public IActionResult GetBLogByWriter(int id)
+        public IActionResult GetBLogByWriter()
         {
             Context c = new Context();
             var userName = User.Identity?.Name;
@@ -36,6 +36,7 @@ namespace WebUI.Controllers
         [HttpGet]
         public IActionResult BlogAdd(int? id)
         {
+           
             CategoryManager cm = new CategoryManager(new EfCategoryReposiyory());
             List<SelectListItem> categoryValues = (from x in cm.GetList()
                                                    select new SelectListItem
@@ -49,6 +50,7 @@ namespace WebUI.Controllers
 
             ViewBag.id = userid;
             ViewBag.cv = categoryValues;
+
             if (id != 0 && id != null)
             {
                 var item = _blogManager.GetBlogById((int)userid);
@@ -65,10 +67,15 @@ namespace WebUI.Controllers
             if (results.IsValid)
             {
                 p.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                _blogManager.TAdd(p);
+
                 // sql trigger sildigim icin burda kendim ekleme yapiyorum
+                // writerId artik Identity den aliniyor
                 using (var context = new Context())
                 {
+                    var username = User.Identity.Name;
+                    var id = context.Writers.Where(x => x.WriterName == username).Select(x => x.Id).FirstOrDefault();
+                    p.WriterId = id;
+                    _blogManager.TAdd(p);
                     BlogRating newRatingRow = new BlogRating { BLogId = p.Id, RatingCount = 0, TotalScore = 0 };
                     context.BlogRatings.Add(newRatingRow);
                     context.SaveChanges();

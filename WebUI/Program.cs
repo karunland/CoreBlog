@@ -27,6 +27,14 @@ builder.Services.AddMvc();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
     x => x.LoginPath = "/Login/Index"
 );
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    //Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.SlidingExpiration = true;
+    //options.Cookie.Expiration = TimeSpan.FromMinutes(100);
+    options.LoginPath = "/Login/Index";
+});
 
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>(x =>
