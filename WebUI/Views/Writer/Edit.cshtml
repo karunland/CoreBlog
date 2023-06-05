@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+@model UserUpdateViewModel
+
+<h1>Edit Identity Lib.</h1>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <form class="forms-sample" asp-action="edit" enctype="multipart/form-data">
+                @*<input hidden asp-for="Id" />*@
+                <div class="form-group">
+                    <label for="WriterName">Full Name</label>
+                    <input type="text" class="form-control" asp-for="namesurname" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="WriterName">User Name</label>
+                    <input type="text" class="form-control" asp-for="username" placeholder="username">
+                </div>
+                <div class="form-group">
+                    <label for="WriterMail">Email address</label>
+                    <input type="email" class="form-control" asp-for="mail" placeholder="Email">
+                </div>
+                @*<div class="form-group">
+                    <label for="WriterPassword">Password</label>
+                    <input type="password" class="form-control" asp-for="WriterPassword" placeholder="Password">
+                </div>*@
+                <div class="form-group">
+                    <label for="WriterImage">File upload</label>
+                    <input type="text" asp-for="imageurl" />
+                </div>
+                @*<div class="form-group">
+                    <label for="WriterAbout">About</label>
+                    <textarea class="form-control" asp-for="WriterAbout" rows="4"></textarea>
+                </div>*@
+                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

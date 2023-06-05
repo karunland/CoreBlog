@@ -5,6 +5,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using WebUI.Models;
@@ -13,8 +14,15 @@ namespace WebUI.Controllers
 {
     public class WriterController : Controller
     {
+
+        private readonly UserManager<AppUser> _userManager;
         WriterManager wm = new WriterManager(new EfWriterRepository());
-        
+
+        public WriterController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
@@ -84,6 +92,30 @@ namespace WebUI.Controllers
             else
                 foreach (var val in results.Errors)
                     ModelState.AddModelError(val.PropertyName, val.ErrorMessage);
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit()
+        {
+            var vals = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel a = new UserUpdateViewModel();
+            a.namesurname = vals.FullName;
+            a.username = vals.UserName;
+            a.mail = vals.Email;
+            return View(a);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserUpdateViewModel p)
+        {
+            var vals = await _userManager.FindByNameAsync(User.Identity.Name);
+            vals.UserName = p.username;
+            vals.FullName = p.namesurname;
+            vals.ImageUrl = p.imageurl;
+            var res = await _userManager.UpdateAsync(vals);
+            if (res.Succeeded)
+                return RedirectToAction("Index", "Dashboard");
             return View();
         }
     }
