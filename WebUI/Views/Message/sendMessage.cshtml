@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "sendMessage";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>sendMessage</h1>
+@model EntityLayer.Concrete.Message2
+
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center gradient-custom-3">
+        <div class="container ">
+            <div class="row d-flex justify-content-center align-items-center ">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            @using (Html.BeginForm("sendMessage", "Message", FormMethod.Post))
+                            {
+                                @*<input hidden type="text" name="WriterId" value="@ViewBag.id">*@
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Subject</label>
+                                    <input type="text" asp-for="Subject" />
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Message Detail</label>
+                                    <textarea name="MessageDetails">@Model?.MessageDetails</textarea>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="mb-2">Reciever</label>
+                                    <input type="number" asp-for="RecieverId" />
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="register-button">Send Message</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

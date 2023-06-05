@@ -12,9 +12,12 @@ namespace WebUI.ViewComponents.Writer
         {
             var username = User.Identity.Name;
             var context = new Context();
-            var id = context.Writers.Where(x => x.WriterName == username).Select(x => x.Id).FirstOrDefault();
+            int id = context.Writers.Where(x => x.WriterName == username).Select(x => x.Id).FirstOrDefault();
 
-            return View(mm.GetInboxListByWriter(id));
+            var list = mm.GetInboxListByWriter(id);
+            ViewBag.Count = list.ToList().Count;
+            if (list.Count > 3) { return View(list.Take(3).ToList()); }
+            return View(list.ToList());
         }
     }
 }
