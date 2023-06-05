@@ -14,7 +14,6 @@ namespace WebUI.Controllers
 {
     public class WriterController : Controller
     {
-
         private readonly UserManager<AppUser> _userManager;
         WriterManager wm = new WriterManager(new EfWriterRepository());
 
@@ -113,6 +112,7 @@ namespace WebUI.Controllers
             vals.UserName = p.username;
             vals.FullName = p.namesurname;
             vals.ImageUrl = p.imageurl;
+            vals.PasswordHash = _userManager.PasswordHasher.HashPassword(vals, p.password);
             var res = await _userManager.UpdateAsync(vals);
             if (res.Succeeded)
                 return RedirectToAction("Index", "Dashboard");

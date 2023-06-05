@@ -40,6 +40,13 @@ namespace WebUI.Controllers
             return View("Index");
         }
 
+        [Route("/login/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
+        }
+
         //[HttpPost]
         //public async Task<IActionResult> Index(Writer p)
         //{
@@ -50,11 +57,11 @@ namespace WebUI.Controllers
         //        var claims = new List<Claim> {
         //            new Claim (ClaimTypes.Name, p.WriterMail)
         //        };
-                
+
         //        var userIdentity = new ClaimsIdentity(claims, "a");
         //        ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
         //        await HttpContext.SignInAsync(principal);
-                
+
         //        HttpContext.Session.SetString("username", p.WriterMail);
         //        return RedirectToAction("Index", "Blog");
         //    }
