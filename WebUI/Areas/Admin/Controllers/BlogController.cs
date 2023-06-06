@@ -7,7 +7,7 @@ using DataAccessLayer.Concrete;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Route("/Admin/[Controller]/")]
+    [Route("/Admin/[Controller]/[action]")]
     public class BlogController : Controller
     {
         //[HttpGet("ExportStaticExcelBlog/")]

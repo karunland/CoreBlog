@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-8 text-right">
                     <span> Today degrees </span>
-                    <h2 class="font-bold">@ViewBag.weather.ToString("N1")'C</h2>
+                    <h2 class="font-bold">@ViewBag?.weather.ToString("N1")'C</h2>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-8 text-right">
                     <span> New messages </span>
-                    <h2 class="font-bold"> @ViewBag.MessageCount </h2>
+                    <h2 class="font-bold"> @ViewBag?.MessageCount </h2>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-8 text-right">
                     <span> Total Comment Count </span>
-                    <h2 class="font-bold"> @ViewBag.CommentCount </h2>
+                    <h2 class="font-bold"> @ViewBag?.CommentCount </h2>
                 </div>
             </div>
         </div>
