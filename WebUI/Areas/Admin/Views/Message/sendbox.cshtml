@@ -1,10 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Inbox";
+﻿
+@{
+    ViewData["Title"] = "sendbox";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-
 @model List<EntityLayer.Concrete.Message2>
 
+<h1>sendbox</h1>
 
 <div class="wrapper wrapper-content">
     <div class="row">
@@ -87,8 +88,9 @@
                                 <td class="check-mail">
                                     <input type="checkbox" class="i-checks">
                                 </td>
-                                <td class="mail-ontact"><a href="#">@item.SenderUser.WriterName</a> <span class="label label-warning float-right">Clients</span> </td>
-                                <td class="mail-subject">@item.Subject
+                                <td class="mail-ontact"><a href="#">@item.ReceiverUser.WriterName</a> <span class="label label-warning float-right">Clients</span> </td>
+                                <td class="mail-subject">
+                                    @item.Subject
                                 </td>
                                 <td class="">
                                     <a href="#">
@@ -107,7 +109,7 @@
                             </tr>
                         }
                         @*
-                         class="label label-info label-warning label-danger float-right"
+                        class="label label-info label-warning label-danger float-right"
                         *@
 
                     </tbody>
