@@ -1,10 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "composeMail";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-@*@model EntityLayer.Concrete.Message2*@
+@model EntityLayer.Concrete.Message2
 
 
 <div class="wrapper wrapper-content">
@@ -60,28 +59,28 @@
             </div>
             <div class="mail-box">
 
-                <div class="mail-body">
-                    <form method="post" href="/admin/message/composeMail">
+                <form method="post" href="/admin/message/composeMail">
+                    <div class="mail-body">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">To:</label>
-                            <div class="col-sm-10"><input type="text"  class="form-control" value=""></div>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="toWho" value=""></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Subject:</label>
-                            <div class="col-sm-10"><input type="text" class="form-control" value=""></div>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="Subject" value=""></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Detail:</label>
-                            <textarea class="col-sm-10" name="" cols="10" rows="6"></textarea>
+                            <textarea class="col-sm-10" name="MessageDetails" cols="10" rows="6"></textarea>
                         </div>
-                    </form>
-                </div>
+                    </div>
 
-                <div class="mail-body text-right tooltip-demo">
-                    <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</a>
-                    <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
-                    <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
-                </div>
+                    <div class="mail-body text-right tooltip-demo">
+                        <button href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</button>
+                        <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                        <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                    </div>
+                </form>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -90,11 +89,12 @@
 
 <style>
     textarea {
-        resize : none !important;
+        resize: none !important;
         border: 0.1px solid #dedede;
         padding: 15px !important;
     }
-    textarea:focus {
-        border: 0.1px solid green;
-    }
+
+        textarea:focus {
+            border: 0.1px solid green;
+        }
 </style>

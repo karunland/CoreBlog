@@ -2,7 +2,9 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebUI.Areas.Admin.Controllers
 {
@@ -11,7 +13,12 @@ namespace WebUI.Areas.Admin.Controllers
     public class MessageController : Controller
     {
         Message2Manager mm = new Message2Manager(new EfMessage2Repository());
+        private readonly UserManager<AppUser> _userManager;
 
+        public MessageController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
         [HttpGet]
         public async Task<IActionResult> Inbox()
         {
@@ -38,9 +45,20 @@ namespace WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> composeMail(Message2 message)
+        public async Task<IActionResult> composeMail(Message2 message, string toWho)
         {
-            return View();
+            if (toWho == "" || toWho == null) { return BadRequest(); }
+            var reciever = await _userManager.FindByNameAsync(toWho);
+            var context = new Context();
+            var recieverId = await context.Writers.Where(x => x.WriterName == reciever.UserName).Select(x => x.Id).FirstOrDefaultAsync();
+            var senderId = await context.Writers.Where(x => x.WriterName == User.Identity.Name).Select(x => x.Id).FirstOrDefaultAsync();
+            if (recieverId == null) { return BadRequest(); }
+            message.RecieverId = recieverId;
+            message.SenderId = senderId;
+
+            mm.TAdd(message);
+
+            return RedirectToAction("sendbox");
         }
     }
 }

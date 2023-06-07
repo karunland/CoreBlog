@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using EntityLayer.Concrete
+@model List<Blog>
+
+<div class="wrapper wrapper-content animated fadeInRight container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-content product-box">
+
+                        <div class="product-imitation">
+                            [ INFO ]
+                        </div>
+                        <div class="product-desc">
+                            <span class="product-price">
+                                @item.CreatedDate.ToString("dd-MMM-yyyy")
+                            </span>
+                            <small class="text-muted">@item.Category.CategoryName</small>
+                            <a href="#" class="product-name"> @item.BlogTitle</a>
+
+                            <div class="small m-t-xs">
+                                @item?.BlogContent.Substring(0, 75)...
+                            </div>
+                            <div class="m-t text-righ">
+
+                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
