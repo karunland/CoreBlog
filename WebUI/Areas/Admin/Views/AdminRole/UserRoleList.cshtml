@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "UserRoleList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using EntityLayer.Concrete
+@model List<AppUser>
+
+<div class="container">
+    <div class="ibox ">
+        <div class="ibox-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td><a href="/Admin/AdminRole/AssignRole/@item.Id" class="btn btn-outline-primary">Assing Role</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a href="/admin/adminrole/index" class="btn btn-outline-primary">Return to Role List</a>
+        </div>
+    </div>
+</div>
+
