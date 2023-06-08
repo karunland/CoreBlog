@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "AddRole";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using WebUI.Areas.Admin.Models
+@model RoleViewModel
+
+
+<div class="container">
+    <h1>Add Role</h1>
+    <form class="form" method="post" href="/admin/adminrole/addrole">
+        <div class="form-group">
+            <label for="name"></label>
+            <input type="text" name="name" id="name"/>
+        <button class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using WebUI.Areas.Admin.Models
+@using EntityLayer.Concrete
+
+@model AppRole
+
+
+    <h1>UpdateRole</h1>
+<form  class="form" method="post" href="/admin/adminrole/updaterole/">
+    <div class="form-group">
+        <label class="" for="Id">Id</label>
+        <input name="Id" id="Id" value="@Model.Id" class="" />
+    </div>
+
+    <div class="form-group row">
+        <label class="" for="Name">Role Title</label>
+        <input name="Name" id="Name" value="@Model.Name" class="" />
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Update</button>
+    </div>
+</form>
