@@ -115,5 +115,11 @@ namespace WebUI.Areas.Admin.Controllers
             }
             return View(list);
         }
+
+        public async Task<IActionResult> AssignRole()
+        {
+
+            return View();
+        }
     }
 }

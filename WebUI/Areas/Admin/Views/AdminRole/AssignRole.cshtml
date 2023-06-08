@@ -1,18 +1,25 @@
-﻿
-@{
-    ViewData["Title"] = "AssignRole";
+﻿@{
+    ViewData["Title"] = "Assign Role";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+
 @using WebUI.Areas.Admin.Models
 @model List<RoleAssignViewModel>
 
 
-<h1>AssignRole</h1>
+<h1>Assign Role</h1>
 
-@foreach (var item in Model)
-{
-    <div class="form-control">
-        <input />
-    </div>
-}
+<form method="post" href class="">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        <div class="form-check">
+            <input type="hidden" asp-for="@Model[i].RoleId" />
+            <input type="hidden" asp-for="@Model[i].Name" />
+            <input type="checkbox" asp-for="@Model[i].Exist" class="form-check-input" />
+            <label class="form-check-label" for="@Model[i].Exist">@Model[i].Name</label>
+        </div>
+    }
+    <button class="btn">Save</button>
+</form>
 
+<a href="/admin/adminrole/userrolelist" class="btn">User List</a>
