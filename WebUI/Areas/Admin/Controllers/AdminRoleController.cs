@@ -79,7 +79,6 @@ namespace WebUI.Areas.Admin.Controllers
             return View(model);
         }
 
-
         public async Task<IActionResult> DeleteRole(int id)
         {
             var vals = await _roleManager.Roles.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -116,10 +115,11 @@ namespace WebUI.Areas.Admin.Controllers
             return View(list);
         }
 
-        public async Task<IActionResult> AssignRole()
+        [HttpPost]
+        [Route("/updateuserrole")]
+        public async Task<IActionResult> UpdateUserRole(List<RoleAssignViewModel>? modelList)
         {
-
-            return View();
+            return Redirect("/admin/adminrole/index");
         }
     }
 }

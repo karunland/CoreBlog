@@ -9,17 +9,33 @@
 
 <h1>Assign Role</h1>
 
-<form method="post" href class="">
+<form method="post" class="form">
     @for (var i = 0; i < Model.Count; i++)
     {
         <div class="form-check">
-            <input type="hidden" asp-for="@Model[i].RoleId" />
-            <input type="hidden" asp-for="@Model[i].Name" />
-            <input type="checkbox" asp-for="@Model[i].Exist" class="form-check-input" />
+            <input hidden type="text" value="@Model[i].RoleId" name="@($"Model[{i}].RoleId")" id="@($"Model[{i}].RoleId")" />
+            <input hidden type="text" value="@Model[i].Name" name="@($"Model[{i}].Name")" id="@($"Model[{i}].Name")" />
+            <input type="checkbox" name="@($"Model[{i}].Exist")" id="@($"Model[{i}].Exist")" class="form-check-input" />
+            <script>
+                function abc() {
+                    let i = @i.ToString();
+                    let str = 'input[name="Model[' + i + '].Exist"]';
+                    $(str).attr('checked', @Model[i].Exist.ToString().ToLower());
+                    //debugger;
+                }
+                abc();
+            </script>
             <label class="form-check-label" for="@Model[i].Exist">@Model[i].Name</label>
         </div>
     }
-    <button class="btn">Save</button>
+    <button id="btn" class="btn">Save</button>
 </form>
 
 <a href="/admin/adminrole/userrolelist" class="btn">User List</a>
+
+<script>
+    $('#btn').on('click', function () {
+        event.preventDefault();
+        debugger;
+    });
+</script>
