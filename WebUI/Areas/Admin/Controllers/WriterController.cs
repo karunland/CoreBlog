@@ -6,7 +6,7 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     [Route("/Admin/[Controller]/[Action]/")]
     public class WriterController : Controller
     {
@@ -14,6 +14,7 @@ namespace WebUI.Areas.Admin.Controllers
         {
             return View();
         }
+
         public static List<WriterClass> writers = new List<WriterClass>
         {
             new WriterClass
@@ -46,6 +47,7 @@ namespace WebUI.Areas.Admin.Controllers
             var json = JsonConvert.SerializeObject(writer);
             return Json(json);
         }
+
         [HttpPost]
         public IActionResult AddWriter(WriterClass writer)
         {
@@ -53,6 +55,7 @@ namespace WebUI.Areas.Admin.Controllers
             var jsonWriter = JsonConvert.SerializeObject(writers);
             return Json(jsonWriter);
         }
+        
         [HttpDelete, Route("{id}")]
         public IActionResult DeleteWriter(int id)
         {

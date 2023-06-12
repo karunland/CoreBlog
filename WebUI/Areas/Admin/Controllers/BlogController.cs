@@ -3,10 +3,12 @@ using ClosedXML;
 using ClosedXML.Excel;
 using WebUI.Areas.Admin.Models;
 using DataAccessLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("/Admin/[Controller]/[action]")]
     public class BlogController : Controller
     {

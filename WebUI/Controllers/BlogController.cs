@@ -10,21 +10,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebUI.Controllers
 {
-    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EfBlogRepository());
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_blogManager.GetList());
         }
-
+        
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             return View(_blogManager.GetBlogById(id));
         }
 
+        [AllowAnonymous]
         public IActionResult GetBLogByWriter()
         {
             Context c = new Context();
@@ -34,6 +36,7 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Writer, Admin")]
         public IActionResult BlogAdd(int? id)
         {
            
@@ -60,6 +63,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer, Admin")]
         public IActionResult BlogAdd(Blog p)
         {
             BlogValidator bv = new BlogValidator();
@@ -93,6 +97,7 @@ namespace WebUI.Controllers
             }
         }
 
+        [Authorize(Roles = "Writer, Admin")]
         public IActionResult BlogDelete(int id)
         {
             _blogManager.DeleteBlog(id);
