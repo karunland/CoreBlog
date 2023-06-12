@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Member,Writer")]
     public class BlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EfBlogRepository());

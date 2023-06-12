@@ -46,7 +46,11 @@ namespace WebUI.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Login");
         }
-
+        [HttpGet]
+        public async Task<IActionResult> AccessDenied()
+        {
+            return View();
+        }
         //[HttpPost]
         //public async Task<IActionResult> Index(Writer p)
         //{

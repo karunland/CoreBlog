@@ -1,10 +1,13 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
+    [Authorize(Roles = "Admin,Member,Writer")]
     public class ContactController : Controller
     {
         ContactManager cm = new ContactManager(new EfContactRepository());
