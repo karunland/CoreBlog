@@ -9,30 +9,28 @@
     <div class="mask d-flex align-items-center gradient-custom-3">
         <div class="container ">
             <div class="row d-flex justify-content-center align-items-center ">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="col-12 col-md-9">
                     <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-5">
+                        <div class="card-body p-3">
                             @using (Html.BeginForm("BlogAdd", "Blog", FormMethod.Post))
                             {
-                                @*<input hidden type="text" name="WriterId" value="@ViewBag.id">*@
                                 <div class="form-outline mb-4">
-                                    <label class="mb-2">Title</label>
+                                    <label class="mb-2 form-label">Title</label>
                                     @Html.TextBoxFor(x => x.BlogTitle, new { @class="form-control"})
                                     @Html.ValidationMessageFor(x => x.BlogTitle, "", new { @class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <label class="mb-2">Image</label>
+                                    <label class="mb-2 form-label">Image</label>
                                     @Html.TextBoxFor(x => x.BlogImage, new { @class="form-control"})
                                     @Html.ValidationMessageFor(x => x.BlogImage, "", new { @class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <label class="mb-2">Thumbnail Image</label>
+                                    <label class="mb-2 form-label">Thumbnail Image</label>
                                     @Html.TextBoxFor(x => x.BlogThumbnailImage, new { @class="form-control"})
                                     @Html.ValidationMessageFor(x => x.BlogThumbnailImage, "", new { @class="text-danger"})
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <label class="mb-2">Category</label>
-                                    @*@Html.LabelFor(x => x.CatergoryId, (List<SelectListItem>)ViewBag.cv, new { @class="form-control"})*@
+                                    <label class="mb-2 form-label">Category</label>
                                     <select class="form-select" asp-items="@ViewBag.cv" asp-for="@Model.CategoryId"></select>
                                 </div>
                                 <div class="form-outline mb-4">

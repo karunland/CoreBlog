@@ -37,7 +37,6 @@ namespace WebUI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Writer, Admin")]
         public IActionResult BlogAdd(int? id)
         {
            
@@ -64,14 +63,13 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Writer, Admin")]
         public IActionResult BlogAdd(Blog p)
         {
             BlogValidator bv = new BlogValidator();
             var results = bv.Validate(p);
             if (results.IsValid)
             {
-                p.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                p.CreatedDate = DateTime.Now;
 
                 // sql trigger sildigim icin burda kendim ekleme yapiyorum
                 // writerId artik Identity den aliniyor
@@ -98,7 +96,45 @@ namespace WebUI.Controllers
             }
         }
 
-        [Authorize(Roles = "Writer, Admin")]
+        [HttpPost]
+        public IActionResult BlogUpdate(Blog p)
+        {
+            BlogValidator bv = new BlogValidator();
+            var results = bv.Validate(p);
+            if (results.IsValid)
+            {
+                using (var context = new Context())
+                {
+                    var username = User.Identity.Name;
+                    var writer = context.Writers.FirstOrDefault(x => x.WriterName == username);
+
+                    if (writer != null)
+                    {
+                        var existingBlog = context.Blogs.FirstOrDefault(x => x.Id == p.Id && x.WriterId == writer.Id);
+
+                        if (existingBlog != null)
+                        {
+                            existingBlog.BlogTitle = p.BlogTitle;
+                            existingBlog.BlogContent = p.BlogContent;
+
+                            context.SaveChanges();
+                            return RedirectToAction("GetBlogByWriter", "Blog");
+                        }
+                    }
+                }
+
+                return NotFound();
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
+        }
+
         public IActionResult BlogDelete(int id)
         {
             _blogManager.DeleteBlog(id);
