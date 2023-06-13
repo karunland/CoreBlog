@@ -82,16 +82,9 @@ namespace WebUI.Controllers
             w.WriterStatus = p.WriterStatus;
             w.WriterAbout = p.WriterAbout;
             WriterValidator validationRules = new WriterValidator();
-            //var results = validationRules.Validate(w);
-            //if (results.IsValid)
-            //{
-                wm.TAdd(w);
-                return RedirectToAction("index", "dashboard");
-            //}
-            //else
-            //    foreach (var val in results.Errors)
-            //        ModelState.AddModelError(val.PropertyName, val.ErrorMessage);
-            //return View();
+            wm.TAdd(w);
+            return RedirectToAction("index", "dashboard");
+            
         }
 
         [HttpGet]
