@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using EntityLayer.Dto;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.ValidationRules
 {
-    public class WriterValidator : AbstractValidator<Writer>
+    public class WriterValidator : AbstractValidator<RegisterDto>
     {
         public WriterValidator()
         {
@@ -21,6 +22,7 @@ namespace BusinessLayer.ValidationRules
             RuleFor(x => x.WriterPassword).Matches(@"[A-Z]+").WithMessage("Password should contain at least one uppercase letter");
             RuleFor(x => x.WriterPassword).Matches(@"[a-z]+").WithMessage("Password should contain at least one lowercase letter");
             RuleFor(x => x.WriterPassword).Matches(@"[0-9]+").WithMessage("Password should contain at least one digit");
+            RuleFor(x => x.WriterPasswordAgain).Equal(x => x.WriterPassword).WithMessage("Passwords do not match");
         }
     }
 }

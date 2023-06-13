@@ -37,8 +37,8 @@ namespace DataAccessLayer.EntityFramework
                 return null;
             // id is aspnets user id so find this guys name
             var loggedInUser = _userManager.Users.Where(x => x.Id.ToString() == id.Value).FirstOrDefault();
-
-            return _context.Writers.Where(x => x.WriterMail == loggedInUser.Email).FirstOrDefault();
+            var item = _context.Writers.Where(x => x.WriterName == loggedInUser.UserName).FirstOrDefault();
+            return item;
         }
     }
 }

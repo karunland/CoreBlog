@@ -74,7 +74,7 @@ namespace WebUI.Controllers
                 var loc = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
                 var stream = new FileStream(loc, FileMode.Create);
                 p.WriterImage.CopyTo(stream);
-                w.WriterImage = newImageName;
+                w.WriterImage = newImageName != null ? "wwwroot/WriterImageFiles/" + newImageName : "";
             }
             w.WriterMail = p.WriterMail;
             w.WriterName = p.WriterName;
@@ -82,16 +82,16 @@ namespace WebUI.Controllers
             w.WriterStatus = p.WriterStatus;
             w.WriterAbout = p.WriterAbout;
             WriterValidator validationRules = new WriterValidator();
-            var results = validationRules.Validate(w);
-            if (results.IsValid)
-            {
+            //var results = validationRules.Validate(w);
+            //if (results.IsValid)
+            //{
                 wm.TAdd(w);
                 return RedirectToAction("index", "dashboard");
-            }
-            else
-                foreach (var val in results.Errors)
-                    ModelState.AddModelError(val.PropertyName, val.ErrorMessage);
-            return View();
+            //}
+            //else
+            //    foreach (var val in results.Errors)
+            //        ModelState.AddModelError(val.PropertyName, val.ErrorMessage);
+            //return View();
         }
 
         [HttpGet]

@@ -33,7 +33,7 @@ namespace WebUI.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Dashboard");
+                    return RedirectToAction("Index", "Blog");
                 }
                 return RedirectToAction("Index", "Login");
             }
