@@ -14,7 +14,7 @@
                 <div class="blog-grid-top">
                     <div class="b-grid-top">
                         <div class="blog_info_left_grid">
-                            <a href="single.html">
+                            <a href="#">
                                 <img src="@Model.BlogImage" class="img-fluid" alt="">
                             </a>
                         </div>
@@ -22,7 +22,7 @@
                             <ul>
                                 <li>
                                     <a href="#">
-                                        <i class="far fa-calendar-alt"></i> FEB 15,2018
+                                        <i class="far fa-calendar-alt"></i> @Model.CreatedDate.ToString("dd-MMMM-yyyy")
                                     </a>
                                 </li>
                                 <li class="mx-2">
@@ -41,12 +41,12 @@
                     </div>
 
                     <h3>
-                        <a href="single.html">Amet consectetur adipisicing </a>
+                        <a href="single.html">@Model.BlogTitle </a>
                     </h3>
                     <p>
                         @(String.IsNullOrEmpty(Model.BlogContent) ? "No content" : Model.BlogContent)
                     </p>
-                    <a href="single.html" class="btn btn-primary read-m">Read More</a>
+                    @*<a href="single.html" class="btn btn-primary read-m">Read More</a>*@
                 </div>
                 
                 @await Component.InvokeAsync("CommentListByBlog", new { BlogId = Model.Id })

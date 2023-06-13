@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     [Route("Admin/[controller]/[action]")]
     public class MessageController : Controller
     {

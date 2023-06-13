@@ -6,7 +6,7 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     [Route("/Admin/[Controller]/[Action]/")]
     public class WriterController : Controller
     {
@@ -55,7 +55,7 @@ namespace WebUI.Areas.Admin.Controllers
             var jsonWriter = JsonConvert.SerializeObject(writers);
             return Json(jsonWriter);
         }
-        
+
         [HttpDelete, Route("{id}")]
         public IActionResult DeleteWriter(int id)
         {

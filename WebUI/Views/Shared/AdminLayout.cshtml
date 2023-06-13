@@ -1,5 +1,17 @@
-﻿@{
+﻿@using DataAccessLayer.Abstract;
+@using EntityLayer.Concrete;
+
+@{
     Layout = null;
+}
+
+@inject IUserDal tokenService;
+@{
+    Writer LoginUser = tokenService.GetLoggedUser();
+    if (LoginUser == null)
+    {
+        LoginUser = new Writer();
+    }
 }
 
 <!DOCTYPE html>
@@ -9,13 +21,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Page</title>
+    <title> Admin Portal </title>
 
     <link href="~/admin/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/admin/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="~/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="~/admin/css/animate.css" rel="stylesheet">
     <link href="~/admin/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="~/icon.png">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 
@@ -41,7 +55,7 @@
                         <li>
                             <span class="m-r-sm text-muted welcome-message">CoreBLog Admin</span>
                         </li>
-                        <li class="dropdown">
+                       @* <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                                 <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                             </a>
@@ -136,44 +150,26 @@
                                 </li>
                             </ul>
                         </li>
-
+*@
 
                         <li>
-                            <a href="login.html">
+                            <a href="/login/logout">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </div>
-            @*<div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>Static Tables</h2>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a>Tables</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            <strong>Static Tables</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
-                </div>
-            </div>*@
+           
             <div class="wrapper wrapper-content animated fadeInRight">
                 @RenderBody()
             </div>
             <div class="footer">
                 <div class="float-right">
-                    10GB of <strong>250GB</strong> Free.
+                    Date: @DateTime.Now.ToString("dd/MM/yyyy")
                 </div>
                 <div>
-                    <strong>Copyright</strong> Example Company &copy; 2014-2018
+                    <a href="https://github.com/karunland/CoreBlog">Project Code</a>
                 </div>
             </div>
         </div>

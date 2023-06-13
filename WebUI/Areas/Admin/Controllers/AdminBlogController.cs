@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     public class AdminBlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EfBlogRepository());
 
-        public async  Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             return View(_blogManager.GetList());
         }

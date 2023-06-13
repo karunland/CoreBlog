@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer.Concrete
 {
@@ -15,10 +16,13 @@ namespace DataAccessLayer.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;" +
-                "Initial Catalog=blogsite;" +
-                "integrated security=true;");
+
+            IConfiguration conf = (JsonConfigurationExtensions.AddJsonFile(new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()), "appsettings.json").Build());
+            string stringUrl = conf["ConnectionStrings:DefaultConnection"];
+
+            optionsBuilder.UseSqlServer(stringUrl);
         }
+ 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

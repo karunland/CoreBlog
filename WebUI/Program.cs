@@ -1,9 +1,10 @@
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using EntityLayer.Concrete;
-using Microsoft.EntityFrameworkCore;
-using DataAccessLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddMvc(config =>
 });
 
 builder.Services.AddMvc();
+builder.Services.AddScoped<IUserDal, EfUserRepository>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
     x => x.LoginPath = "/Login/Index"
@@ -33,7 +35,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.SlidingExpiration = true;
     options.AccessDeniedPath = new PathString("/Login/AccessDenied");
-    //options.Cookie.Expiration = TimeSpan.FromMinutes(100);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
     options.LoginPath = "/Login/Index";
 });
 
@@ -50,7 +52,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -65,7 +66,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=login}/{action=index}/{id?}");
+    pattern: "{controller=blog}/{action=index}/{id?}");
 
 app.UseAuthentication();
 

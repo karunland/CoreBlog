@@ -4,10 +4,12 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace error_fix_package.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         WriterManager _writerManager = new WriterManager(new EfWriterRepository());

@@ -9,7 +9,7 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     public class AdminRoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;

@@ -10,7 +10,7 @@ using X.PagedList;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     [Route("Admin/[controller]")]
     public class CategoryController : Controller
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     [Route("/Admin/[Controller]/[action]")]
     public class BlogController : Controller
     {
@@ -30,7 +30,7 @@ namespace WebUI.Areas.Admin.Controllers
                     blogCount++;
                 }
 
-                using (var stream = new  MemoryStream())
+                using (var stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
                     var content = stream.ToArray();

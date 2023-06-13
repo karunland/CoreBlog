@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 <ul class="blog-icons my-4">
                                     <li>
-                                        <a href="#">
+                                        <a asp-action="Details" asp-route-id="@item.Id">
                                             <i class="far fa-calendar-alt"></i>  @(@item.CreatedDate == default(DateTime) ? "--/--/--" : ((DateTime)@item.CreatedDate).ToString("dd/MMM/yyyy"))
                                         </a>
                                     </li>

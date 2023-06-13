@@ -1,27 +1,47 @@
-﻿
+﻿@using DataAccessLayer.Abstract;
+@using EntityLayer.Concrete;
 
+
+@inject IUserDal tokenService;
+
+@{
+    Writer LoginUser = tokenService.GetLoggedUser();
+    if (LoginUser == null)
+    {
+        LoginUser = new Writer() { Id = 0};
+    }
+}
 <!--Header-->
 <header>
     <div class="top-bar_sub_w3layouts container-fluid">
         <div class="row">
             <div class="col-md-4 logo text-left">
                 <a class="navbar-brand" href="index.html">
-                    <i class="fab fa-linode"></i> Weblog
+                    <i class="fab fa-linode"></i> Core Blog
                 </a>
             </div>
+
             <div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
-                @*<span>Welcome</span>*@
-                <span class="mx-lg-4 mx-md-2  mx-1">
-                    <a href="@Url.Action("Index", "Login")">
-                        <i class="fas fa-lock"></i> Sign In
-                    </a>
-                </span>
-                <span>
-                    <a href="@Url.Action("Index", "Register")">
-                        <i class="far fa-user"></i> Register
-                    </a>
-                </span>
+                @if (LoginUser.Id != 0)
+                {
+                    <div>Welcome</div>
+                }
+                else
+                {
+                    <span class="mx-lg-4 mx-md-2  mx-1">
+                        <a href="@Url.Action("Index", "Login")">
+                            <i class="fas fa-lock"></i> Sign In
+                        </a>
+                    </span>
+                    <span>
+                        <a href="@Url.Action("Index", "Register")">
+                            <i class="far fa-user"></i> Register
+                        </a>
+                    </span>
+                }
+
             </div>
+
             <div class="col-md-4 log-icons text-right">
 
                 <ul class="social_list1 mt-3">
@@ -71,20 +91,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about/index">About</a>
                     </li>
-                    @*<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            Features
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"></a>
-                            <a class="dropdown-item" href="/blog/index">Standard Blog</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/blog/index">2 Column Blog</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/blog/index">3 Column Blog</a>
-                        </div>
-                    </li>*@
+
                     <li class="nav-item">
                         <a class="nav-link" href="/blog/index">
                             BLogs
@@ -94,10 +101,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/contact/index">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Dashboard</a>
-                    </li>
-
+                    @if (LoginUser.Id != 0)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login/logout">Sign Out</a>
+                        </li>
+                    }
                 </ul>
                 <form action="#" method="post" class="form-inline my-2 my-lg-0 header-search">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search here..." name="Search" required="">

@@ -5,7 +5,7 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+
     public class ChartController : Controller
     {
         public IActionResult Index()
@@ -34,7 +34,7 @@ namespace WebUI.Areas.Admin.Controllers
                 categorycount = 2
             }
             );
-            return Json(new { jsonlist = mlist } );
+            return Json(new { jsonlist = mlist });
         }
     }
 }

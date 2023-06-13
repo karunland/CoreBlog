@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class AboutController : Controller
     {
         AboutManager am = new AboutManager(new EfAboutRepository());
@@ -14,10 +16,10 @@ namespace WebUI.Controllers
             return View(items);
         }
 
-        [HttpGet]
-        public PartialViewResult SocialMediaAbout()
-        {
-            return PartialView();
-        }
+        //[HttpGet]
+        //public PartialViewResult SocialMediaAbout()
+        //{
+        //    return PartialView();
+        //}
     }
 }

@@ -14,5 +14,7 @@ namespace DataAccessLayer.Abstract
         /// </summary>
         /// <returns></returns>
         int GetCurrentUserId(string userName);
+
+        Writer GetLoggedUser();
     }
 }

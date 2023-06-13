@@ -25,9 +25,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 COPY --from=publish /src/publish .
 
-# ASP.NET Core geliştirici sertifikasını yükle
-# RUN dotnet dev-certs https --trust
+ENV ASPNETCORE_URLS=http://0.0.0.0:5011
+EXPOSE 5011
 
-# Run HTTP instead of HTTPS 
-ENV ASPNETCORE_URLS=http://+:80
 ENTRYPOINT ["dotnet", "WebUI.dll"]
