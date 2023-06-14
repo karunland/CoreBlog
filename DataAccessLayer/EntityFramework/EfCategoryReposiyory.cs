@@ -2,6 +2,7 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositores;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.EntityFramework
 {
@@ -12,6 +13,14 @@ namespace DataAccessLayer.EntityFramework
             using (var item = new Context())
             {
                 return item.Catergories.ToList();
+            }
+        }
+
+        public List<Category> GetListWithBlogs()
+        {
+            using (var item = new Context())
+            {
+                return item.Catergories.Include(x => x.Blogs).ToList();
             }
         }
     }

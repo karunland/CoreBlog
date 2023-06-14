@@ -39,7 +39,6 @@ namespace WebUI.Controllers
             if (results.IsValid)
             {
                 Writer _mappedPerson = _mapper.Map<Writer>(p);
-                //_mappedPerson.WriterAbout = "";
 
                 if (p.WriterImage != null)
                 {

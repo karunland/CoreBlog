@@ -25,5 +25,14 @@ namespace DataAccessLayer.EntityFramework
                 return x;
             }
         }
+
+        public List<Comment> GetAllwithUser(int blogId)
+        {             
+            using (var context = new Context())
+            {
+                List<Comment> x = context.Comments.Include(x => x.Writer).Where(x => x.BlogId == blogId).ToList();
+                return x;
+            }
+        }
     }
 }

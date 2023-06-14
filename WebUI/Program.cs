@@ -1,15 +1,10 @@
-using AutoMapper;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
-using DataAccessLayer.Configure;
 using DataAccessLayer.EntityFramework;
-using DataAccessLayer.Mapping;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,9 +29,9 @@ builder.Services.AddScoped<IUserDal, EfUserRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
     x => x.LoginPath = "/Login/Index"
 );
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    //Cookie settings
     options.Cookie.HttpOnly = true;
     options.SlidingExpiration = true;
     options.AccessDeniedPath = new PathString("/Login/AccessDenied");
@@ -46,13 +41,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddDbContext<Context>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
-//var mappingConfig = new MapperConfiguration(mc =>
-//{
-//    mc.AddProfile(new MapProfile());
-//});
-//IMapper mapper = mappingConfig.CreateMapper();
-//builder.Services.AddSingleton(mapper);
 
 builder.Services.AddIdentity<AppUser, AppRole>(x =>
 {
@@ -94,4 +82,3 @@ app.UseEndpoints(endpoints =>
     );
 });
 app.Run();
-

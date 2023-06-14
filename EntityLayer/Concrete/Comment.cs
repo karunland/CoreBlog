@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Comment
+    public class Comment : BaseEntity
     {
         [Key]
         public int Id { get; set; }
         public string CommentUserName { get; set; }
         public string CommentContent { get; set; }
         public string CommentTitle { get; set; }
-        public DateTime CommentDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public int Score { get; set; }
+        public bool isUser { get; set; }
         public bool CommentStatus { get; set; }
-
         public int BlogId { get; set; }
-
         public Blog Blog { get; set; }
+        public int? WriterId { get; set; }
+        public Writer? Writer { get; set; }
 
     }
 }

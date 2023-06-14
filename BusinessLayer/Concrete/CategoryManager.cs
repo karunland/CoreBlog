@@ -24,6 +24,11 @@ namespace BusinessLayer.Concrete
             return _categoryDal.GetListAll();
         }
 
+        public List<Category> GetListWithBlogs()
+        {
+            return _categoryDal.GetListWithBlogs();
+        }
+
         public void TAdd(Category t)
         {
             if (t.CategoryName != "" &&

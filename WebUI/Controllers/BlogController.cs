@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
@@ -14,32 +15,41 @@ namespace WebUI.Controllers
     public class BlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EfBlogRepository());
-        
+        private readonly IUserDal _userDal;
+        CommentManager _commentManager = new CommentManager(new EfCommentRepository());
+
+        public BlogController(IUserDal userDal)
+        {
+            _userDal = userDal;
+        }
+
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_blogManager.GetList());
         }
-        
+
         [AllowAnonymous]
         public IActionResult Details(int id)
         {
+            ViewBag.CommentCount =  _commentManager.GetList(id).Count();
             return View(_blogManager.GetBlogById(id));
         }
 
         [AllowAnonymous]
         public IActionResult GetBLogByWriter()
         {
-            Context c = new Context();
             var userName = User.Identity?.Name;
-            var userid = c.Writers.Where(x => x.WriterName == userName).Select(y => y.Id).FirstOrDefault();
+            if (userName == null)
+                return RedirectToAction("Index", "Home");
+            var userid = _userDal.GetCurrentUserId(userName);
             return View(_blogManager.GetBlogByWriter(userid));
         }
 
         [HttpGet]
         public IActionResult BlogAdd(int? id)
         {
-           
+
             CategoryManager cm = new CategoryManager(new EfCategoryReposiyory());
             List<SelectListItem> categoryValues = (from x in cm.GetList()
                                                    select new SelectListItem
@@ -83,7 +93,7 @@ namespace WebUI.Controllers
                     context.BlogRatings.Add(newRatingRow);
                     context.SaveChanges();
                 }
-                
+
                 return RedirectToAction("GetBlogByWriter", "Blog");
             }
             else
@@ -96,44 +106,44 @@ namespace WebUI.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult BlogUpdate(Blog p)
-        {
-            BlogValidator bv = new BlogValidator();
-            var results = bv.Validate(p);
-            if (results.IsValid)
-            {
-                using (var context = new Context())
-                {
-                    var username = User.Identity.Name;
-                    var writer = context.Writers.FirstOrDefault(x => x.WriterName == username);
+        //[HttpPost]
+        //public IActionResult BlogUpdate(Blog p)
+        //{
+        //    BlogValidator bv = new BlogValidator();
+        //    var results = bv.Validate(p);
+        //    if (results.IsValid)
+        //    {
+        //        using (var context = new Context())
+        //        {
+        //            var username = User.Identity.Name;
+        //            var writer = context.Writers.FirstOrDefault(x => x.WriterName == username);
 
-                    if (writer != null)
-                    {
-                        var existingBlog = context.Blogs.FirstOrDefault(x => x.Id == p.Id && x.WriterId == writer.Id);
+        //            if (writer != null)
+        //            {
+        //                var existingBlog = context.Blogs.FirstOrDefault(x => x.Id == p.Id && x.WriterId == writer.Id);
 
-                        if (existingBlog != null)
-                        {
-                            existingBlog.BlogTitle = p.BlogTitle;
-                            existingBlog.BlogContent = p.BlogContent;
+        //                if (existingBlog != null)
+        //                {
+        //                    existingBlog.BlogTitle = p.BlogTitle;
+        //                    existingBlog.BlogContent = p.BlogContent;
 
-                            context.SaveChanges();
-                            return RedirectToAction("GetBlogByWriter", "Blog");
-                        }
-                    }
-                }
+        //                    context.SaveChanges();
+        //                    return RedirectToAction("GetBlogByWriter", "Blog");
+        //                }
+        //            }
+        //        }
 
-                return NotFound();
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-                return View();
-            }
-        }
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        foreach (var item in results.Errors)
+        //        {
+        //            ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+        //        }
+        //        return View();
+        //    }
+        //}
 
         public IActionResult BlogDelete(int id)
         {

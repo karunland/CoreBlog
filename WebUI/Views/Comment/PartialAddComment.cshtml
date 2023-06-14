@@ -1,13 +1,33 @@
-﻿
+﻿@using DataAccessLayer.Abstract;
+@using EntityLayer.Concrete;
+
+@inject IUserDal tokenService;
+@{
+    Writer LoginUser = tokenService.GetLoggedUser();
+    if (LoginUser == null)
+    {
+        LoginUser = new Writer();
+    }
+}
 
 <div class="comment-top">
     <h4>Leave a Comment</h4>
     <div class="comment-bottom">
         <form action="/Comment/PartialAddComment/" method="post">
-            <input class="form-control" type="text" name="CommentUserName" placeholder="Name" required="">
+
+            @if (LoginUser.Id != 0)
+            {
+                <input class="form-control mb-3" readonly name="CommentUserName" value="@LoginUser.WriterName" required>
+                <input readonly name="UserId" hidden value="@LoginUser.Id">
+            }
+            else
+            {
+                <input class="form-control  mb-3" name="CommentUserName" placeholder="Name" required>
+            }
+
             <input hidden name="BlogId" value="@Model.Id">
-            <input class="form-control" type="text" name="CommentTitle" placeholder="Title" required="">
-            <textarea class="form-control" name="CommentContent" placeholder="Message..." required=""></textarea>
+            <input class="form-control mb-3" name="CommentTitle" placeholder="Title" required>
+            <textarea class="form-control mb-3" rows="6" name="CommentContent" placeholder="Your message..." required></textarea>
             <button type="submit" class="btn btn-primary submit">Submit</button>
         </form>
     </div>

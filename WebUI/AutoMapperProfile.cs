@@ -10,8 +10,8 @@ namespace WebUI
         {
             CreateMap<RegisterDto, Writer>()
                 .ForMember(p => p.WriterAbout, opt => opt.MapFrom(src => ""));
-
             CreateMap<Writer, RegisterDto>();
+            CreateMap<Comment, CommentDto>();
         }
     }
 }

@@ -28,7 +28,6 @@ namespace WebUI.Controllers
         public IActionResult PartialAddComment(Comment model)
         {
             model.CommentStatus = true;
-            model.CommentDate = DateTime.Now;
             if (model.Score == null || model.Score == 0)
                 model.Score = 5;
             cm.CommentAdd(model);

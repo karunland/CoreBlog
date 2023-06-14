@@ -15,11 +15,5 @@ namespace WebUI.Controllers
             var items = am.GetList();
             return View(items);
         }
-
-        //[HttpGet]
-        //public PartialViewResult SocialMediaAbout()
-        //{
-        //    return PartialView();
-        //}
     }
 }
