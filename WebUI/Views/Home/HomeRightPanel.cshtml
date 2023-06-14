@@ -1,0 +1,15 @@
+﻿
+
+<aside class="col-lg-4 agileits-w3ls-right-blog-con text-right" style="margin-top:100px;">
+
+    <div class="right-blog-info text-left">
+
+        @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+
+        @await Component.InvokeAsync("CategoryList")
+
+        @await Component.InvokeAsync("Last3Blogs")
+
+    </div>
+
+</aside>
