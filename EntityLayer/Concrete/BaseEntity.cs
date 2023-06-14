@@ -10,7 +10,7 @@ namespace EntityLayer.Concrete
     public class BaseEntity
     {
         public bool isDeleted { get; set; } = false;
-        public DateTime CreatedDate { get; set; } = DateTime.Parse(DateTime.Now.ToString());
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime DeletedDate { get; set; }
 
     }

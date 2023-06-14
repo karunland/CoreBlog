@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using AutoMapper;
+using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
@@ -16,10 +17,12 @@ namespace WebUI.Controllers
     {
         WriterManager _writerManager = new WriterManager(new EfWriterRepository());
         private readonly UserManager<AppUser> _userManger;
+        private readonly IMapper _mapper;
 
-        public RegisterController(UserManager<AppUser> userManger)
+        public RegisterController(UserManager<AppUser> userManger, IMapper mapper)
         {
             _userManger = userManger;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -32,14 +35,11 @@ namespace WebUI.Controllers
         public async Task<IActionResult> Index(RegisterDto p)
         {
             WriterValidator vw = new WriterValidator();
-            Writer writer = new Writer();
             ValidationResult results = vw.Validate(p);
             if (results.IsValid)
             {
-                if (writer.WriterPassword != writer.WriterPasswordAgain)
-                {
-                    return View("Index");
-                }
+                Writer _mappedPerson = _mapper.Map<Writer>(p);
+                //_mappedPerson.WriterAbout = "";
 
                 if (p.WriterImage != null)
                 {
@@ -48,30 +48,22 @@ namespace WebUI.Controllers
                     var loc = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
                     var stream = new FileStream(loc, FileMode.Create);
                     p.WriterImage.CopyTo(stream);
-                    writer.WriterImage = newImageName != null ? "/WriterImageFiles/" + newImageName : "";
+                    _mappedPerson.WriterImage = "/WriterImageFiles/" + newImageName;
                 }
                 else
-                    writer.WriterImage = "/writer/assets/images/faces-clipart/pic-" + new Random().Next(1, 4) + ".png";
+                    _mappedPerson.WriterImage = "/writer/assets/images/faces-clipart/pic-" + new Random().Next(1, 4) + ".png";
 
-                writer.Id = 0;
-                writer.WriterName = p.WriterName;
-                writer.WriterMail = p.WriterMail;
-                writer.WriterPassword = p.WriterPassword;
-                writer.WriterAbout = "";
-                writer.WriterStatus = true;
-                writer.WriterPasswordAgain = p.WriterPasswordAgain;
-
-                _writerManager.TAdd(writer);
+                _writerManager.TAdd(_mappedPerson);
 
                 AppUser user = new AppUser()
                 {
-                    Email = writer.WriterMail,
-                    FullName = writer.WriterName,
-                    UserName = writer.WriterName,
-                    ImageUrl = writer.WriterImage
+                    Email = _mappedPerson.WriterMail,
+                    FullName = _mappedPerson.WriterName,
+                    UserName = _mappedPerson.WriterName,
+                    ImageUrl = _mappedPerson.WriterImage
                 };
 
-                var result = await _userManger.CreateAsync(user, writer.WriterPassword);
+                var result = await _userManger.CreateAsync(user, _mappedPerson.WriterPassword);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Login");
