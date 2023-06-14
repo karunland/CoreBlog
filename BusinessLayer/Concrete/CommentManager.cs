@@ -11,6 +11,7 @@ namespace BusinessLayer.Concrete
         {
             _commentDal = commentDal;
         }
+
         public void CommentAdd(Comment comment)
         {
             _commentDal.Insert(comment);
@@ -18,8 +19,9 @@ namespace BusinessLayer.Concrete
 
         public List<Comment> GetList(int id)
         {
-            return _commentDal.GetAll(x => x.BlogId == id);
+            return _commentDal.GetAllwithUser(id);
         }
+
         public List<Comment> GetListAll()
         {
             return _commentDal.GetAll();

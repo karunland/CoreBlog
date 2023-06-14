@@ -18,7 +18,7 @@
             @if (LoginUser.Id != 0)
             {
                 <input class="form-control mb-3" readonly name="CommentUserName" value="@LoginUser.WriterName" required>
-                <input readonly name="UserId" hidden value="@LoginUser.Id">
+                <input readonly name="WriterId" hidden value="@LoginUser.Id">
             }
             else
             {
@@ -28,7 +28,7 @@
             <input hidden name="BlogId" value="@Model.Id">
             <input class="form-control mb-3" name="CommentTitle" placeholder="Title" required>
             <textarea class="form-control mb-3" rows="6" name="CommentContent" placeholder="Your message..." required></textarea>
-            <button type="submit" class="btn btn-primary submit">Submit</button>
+            <button type="submit" class="btn btn-primary submit">Submit Comment</button>
         </form>
     </div>
 </div>

@@ -10,8 +10,19 @@
     {
         @foreach (var item in Model)
         {
-            <div class="media" style="padding:20px;">
-                <img src="~/CoreBlogTema/images/t1.jpg" alt="" class="img-fluid" />
+            <div class="media" style="padding: 20px; display: flex; align-items: center;">
+                @if (item.Writer != null && item.Writer.WriterImage != null)
+                {
+                    <div style="width: 80px; height: 80px; display: flex; justify-content: center; align-items: center;">
+                        <img src="@item.Writer.WriterImage" alt="" class="img-fluid" style="max-width: 100%; max-height: 100%;border-radius:50%;" />
+                    </div>
+                }
+                else
+                {
+                    <div style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center;">
+                        <img src="@($"/writer/assets/images/faces-clipart/pic-{new Random().Next(1, 4)}.png")" alt="no user" class="img-fluid" style="max-width: 100%; max-height: 100%;border-radius:50%;" />
+                    </div>
+                }
                 <div class="media-body">
                     <h5 class="mt-0">@item.CommentUserName</h5>
                     <p>@item.CommentContent</p>
