@@ -9,4 +9,3 @@ Projeye güncel olarak devam etmekte....
 docker build -t blogsite-1 .
 docker run  --rm -d -p 5011:5011 blogsite-1
 ```
-> SSL den dolayi hata aliyorum 10/5/2023
