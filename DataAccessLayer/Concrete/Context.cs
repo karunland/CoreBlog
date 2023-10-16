@@ -17,14 +17,10 @@ namespace DataAccessLayer.Concrete
         {
             base.OnConfiguring(optionsBuilder);
 
-            IConfiguration config = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../WebUI")) // appsettings.json dosyasının bulunduğu dizini belirtin                .AddJsonFile("appsettings.json")
-                .AddJsonFile("appsettings.json")
-                .Build();
+            IConfiguration conf = (JsonConfigurationExtensions.AddJsonFile(new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()), "appsettings.json").Build());
 
-            // "ConnectionStrings" bölümündeki "makine1" anahtarını kullanarak bağlantı dizesini alın
-            string connectionString = config.GetConnectionString("makine1");
-            optionsBuilder.UseSqlServer(connectionString);
+            string stringUrl= conf["ConnectionStrings:makine1"];
+            optionsBuilder.UseSqlServer(stringUrl);
         }
 
 
