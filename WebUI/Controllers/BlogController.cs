@@ -106,45 +106,6 @@ namespace WebUI.Controllers
             }
         }
 
-        //[HttpPost]
-        //public IActionResult BlogUpdate(Blog p)
-        //{
-        //    BlogValidator bv = new BlogValidator();
-        //    var results = bv.Validate(p);
-        //    if (results.IsValid)
-        //    {
-        //        using (var context = new Context())
-        //        {
-        //            var username = User.Identity.Name;
-        //            var writer = context.Writers.FirstOrDefault(x => x.WriterName == username);
-
-        //            if (writer != null)
-        //            {
-        //                var existingBlog = context.Blogs.FirstOrDefault(x => x.Id == p.Id && x.WriterId == writer.Id);
-
-        //                if (existingBlog != null)
-        //                {
-        //                    existingBlog.BlogTitle = p.BlogTitle;
-        //                    existingBlog.BlogContent = p.BlogContent;
-
-        //                    context.SaveChanges();
-        //                    return RedirectToAction("GetBlogByWriter", "Blog");
-        //                }
-        //            }
-        //        }
-
-        //        return NotFound();
-        //    }
-        //    else
-        //    {
-        //        foreach (var item in results.Errors)
-        //        {
-        //            ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-        //        }
-        //        return View();
-        //    }
-        //}
-
         public IActionResult BlogDelete(int id)
         {
             _blogManager.DeleteBlog(id);

@@ -5,6 +5,7 @@ using DataAccessLayer.Repositores;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace DataAccessLayer.EntityFramework
 {
@@ -16,6 +17,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 var list = item.Blogs
                     .Include(x => x.Category)
+                    .Where(x => !x.isDeleted)
                     .ToList();
 
                 return list;
@@ -28,7 +30,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 var list = item.Blogs
                     .Include(x => x.Category)
-                    .Where(x => x.WriterId == WriterId && x.isDeleted == false)
+                    .Where(x => x.WriterId == WriterId && !x.isDeleted)
                     .ToList();
 
                 return list;
@@ -49,7 +51,7 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                Blog item = c.Blogs.Where(x => x.Id == id).FirstOrDefault();
+                var item = c.Blogs.Where(x => x.Id == id && !x.isDeleted).FirstOrDefault();
                 item.isDeleted = true;
                 c.SaveChanges();
             }
