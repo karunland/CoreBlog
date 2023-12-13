@@ -4,7 +4,7 @@ Murat Yücedağ Eğitim [Vidyo serisi](https://www.youtube.com/playlist?list=PLK
 <br>
 Projeye güncel olarak devam etmekte....
 
-#### Canlı versiyon aktif => <a href="http://karunland.eastus.cloudapp.azure.com:5005/" target="_blank">karunland.eastus.cloudapp.azure.com:5011/</a> 
+#### Canlı versiyon aktif => <a href="https://blog.karunlander.net" target="_blank">blog.karunlander.net/</a> 
 
 ### Ornek Docker kullanimi
 ```bash
