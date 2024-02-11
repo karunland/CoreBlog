@@ -1,5 +1,5 @@
 # ---- Build stage ----
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY . .
@@ -21,7 +21,7 @@ FROM build AS publish
 RUN dotnet publish ./WebUI --configuration Release --output ./publish
 
 # ---- Runtime stage ----
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=publish /src/publish .
 

@@ -7,7 +7,7 @@ project.lock.json
 *.pyc
 
 # Visual Studio Code
-.vscode
+# .vscode
 
 # User-specific files
 *.suo
@@ -31,7 +31,4 @@ msbuild.err
 msbuild.wrn
 
 # Visual Studio 2015
-.vs/
-
-appsettings.json
-/WebUI/appsettings.json
+# .vs/
