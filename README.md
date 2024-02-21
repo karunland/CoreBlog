@@ -9,5 +9,5 @@ Projeye güncel olarak devam etmekte....
 ### Ornek Docker kullanimi
 ```bash
 docker build -t blogsite-1 .
-docker run  --rm -d -p 5011:5011 blogsite-1
+docker run -d --restart unless-stopped -p 5011:5011 --name blog-container blogsite-1:latest
 ```
