@@ -2,18 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY . .
+COPY ./ ./
 
-RUN dotnet restore ./BusinessLayer
-RUN dotnet build ./BusinessLayer --configuration Release
-
-RUN dotnet restore ./DataAccessLayer
-RUN dotnet build ./DataAccessLayer --configuration Release
-
-RUN dotnet restore ./EntityLayer
-RUN dotnet build ./EntityLayer --configuration Release
-
-RUN dotnet restore ./WebUI
+# RUN dotnet restore ./WebUI
 RUN dotnet build ./WebUI --configuration Release
 
 # ---- Publish stage ----
